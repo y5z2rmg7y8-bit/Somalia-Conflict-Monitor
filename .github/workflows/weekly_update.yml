@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests pandas plotly streamlit anthropic python-dotenv openpyxl
+          pip install -r requirements-pipeline.txt
 
       - name: Run pipeline
         env:

@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import json
 import re
+import os
 
 st.set_page_config(
     page_title="Somalia Conflict Monitor",
@@ -45,6 +46,20 @@ data_quality = metadata.get("data_quality", {})
 
 df_reporting = df_full[df_full["event_date"] >= current_month_start].copy()
 
+# Previous month data for trend indicators
+prev_month_start = (current_month_start - pd.offsets.MonthBegin(1))
+prev_month_end = current_month_start - pd.Timedelta(days=1)
+df_prev = df_full[(df_full["event_date"] >= prev_month_start) & (df_full["event_date"] <= prev_month_end)]
+
+# Try to get prev month events from baseline_months list first (more reliable)
+baseline_months = metadata.get("baseline_months", [])
+prev_month_label = prev_month_start.strftime("%B %Y")
+prev_month_events_meta = next(
+    (m["events"] for m in baseline_months if m["label"] == prev_month_label), None
+)
+prev_events = prev_month_events_meta if prev_month_events_meta is not None else len(df_prev)
+prev_fatalities = int(df_prev["fatalities"].sum())
+
 colour_map = {
     "Battles": "#c0392b",
     "Violence against civilians": "#e67e22",
@@ -62,6 +77,64 @@ def chart_label(etype):
     return CHART_LABEL_MAP.get(etype, etype)
 
 chart_colour_map = {chart_label(k): v for k, v in colour_map.items()}
+
+# ============================================================
+# BRIEF PARSING HELPERS  (needed early for executive summary)
+# ============================================================
+
+SECTION_MARKERS = [
+    ("[OVERVIEW]", "Overview"),
+    ("[FORECAST REVIEW]", "Forecast Review"),
+    ("[DATA COVERAGE]", "Data Coverage"),
+    ("[THEMATIC ANALYSIS]", "Thematic Analysis"),
+    ("[GEOGRAPHIC FOCUS]", "Geographic Focus"),
+    ("[TRENDS AND OUTLOOK]", "Trends And Outlook"),
+    ("[WHAT TO WATCH]", "What To Watch"),
+    ("[REFERENCES]", "References"),
+]
+
+def extract_sections(text):
+    sections = {}
+    for marker, title in SECTION_MARKERS:
+        start = text.find(marker)
+        if start == -1:
+            continue
+        start += len(marker)
+        end = len(text)
+        for other_marker, _ in SECTION_MARKERS:
+            if other_marker == marker:
+                continue
+            pos = text.find(other_marker, start)
+            if pos != -1 and pos < end:
+                end = pos
+        sections[marker] = (title, text[start:end].strip())
+    return sections
+
+def format_brief_html(text):
+    """Convert brief markup to HTML for safe rendering with styled comments."""
+    # Bold
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    # Comment blocks → blockquote style
+    def _comment_block(m):
+        inner = m.group(1).strip()
+        return (
+            '<div style="border-left:3px solid #b0bec5;padding:4px 12px;margin:8px 0 8px 0;'
+            'color:#78909c;font-size:0.92em;font-style:italic;">'
+            f'Comment:{inner}</div>'
+        )
+    text = re.sub(r'\[Comment:(.*?)\]', _comment_block, text, flags=re.DOTALL)
+    # Assumption blocks → same style but slightly different shade
+    def _assumption_block(m):
+        inner = m.group(1).strip()
+        return (
+            '<div style="border-left:3px solid #b0bec5;padding:4px 12px;margin:8px 0 8px 0;'
+            'color:#78909c;font-size:0.92em;font-style:italic;">'
+            f'Assumption:{inner}</div>'
+        )
+    text = re.sub(r'\[Assumption:(.*?)\]', _assumption_block, text, flags=re.DOTALL)
+    return text
+
+sections = extract_sections(brief_text)
 
 # ============================================================
 # HEADER
@@ -82,6 +155,24 @@ st.markdown(
 )
 
 # ============================================================
+# EXECUTIVE SUMMARY
+# ============================================================
+
+if "[OVERVIEW]" in sections:
+    _, overview_text = sections["[OVERVIEW]"]
+    st.markdown(
+        f"""
+        <div style="background:#f0f4f8;border-left:5px solid #c0392b;
+                    border-radius:0 6px 6px 0;padding:16px 20px;margin-bottom:24px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;
+                        letter-spacing:1px;color:#c0392b;margin-bottom:8px;">Executive Summary</div>
+            <div style="font-size:14px;color:#2c3e50;line-height:1.6;">{overview_text}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+# ============================================================
 # STAT CARDS
 # ============================================================
 
@@ -90,22 +181,65 @@ total_reporting_fatalities = metadata.get("total_fatalities_reporting_month", in
 regions_affected = df_reporting["admin1"].nunique()
 total_dataset_events = metadata.get("total_events", len(df_full))
 
+# Trend deltas
+def _pct_delta(current, previous):
+    if previous and previous > 0:
+        pct = (current - previous) / previous * 100
+        sign = "+" if pct > 0 else ""
+        return f"{sign}{pct:.0f}% from {prev_month_label.split()[0]}"
+    return None
+
+events_delta = _pct_delta(total_reporting_events, prev_events)
+fatalities_delta = _pct_delta(total_reporting_fatalities, prev_fatalities)
+
+# National per-capita conflict rate
+national_percap = None
+if per_capita_data:
+    total_pop = sum(d.get("population", 0) for d in per_capita_data.values())
+    if total_pop > 0:
+        national_percap = total_reporting_events / total_pop * 100_000
+
+# IPC Phase 3+ total
+total_crisis = sum(v.get("population_in_crisis") or 0 for v in ipc_data.values()) if ipc_data else None
+
+def _stat_card(number, label, delta=None, delta_positive_is_bad=True, accent="#c0392b", fmt="{:,}"):
+    number_str = fmt.format(number) if isinstance(number, (int, float)) else str(number)
+    delta_html = ""
+    if delta:
+        # For conflict metrics, increases are bad (red), decreases are good (green)
+        is_increase = delta.startswith("+")
+        if delta_positive_is_bad:
+            color = "#c0392b" if is_increase else "#27ae60"
+        else:
+            color = "#27ae60" if is_increase else "#c0392b"
+        delta_html = f'<div style="font-size:11px;color:{color};margin-top:2px;">{delta}</div>'
+    return f"""
+    <div style="background:#fff;border-radius:6px;padding:16px;text-align:center;
+                box-shadow:0 1px 4px rgba(0,0,0,0.08);border-top:3px solid {accent};">
+        <div style="font-size:28px;font-weight:700;color:#1a2332;">{number_str}</div>
+        <div style="font-size:11px;color:#7f8c8d;text-transform:uppercase;
+                    letter-spacing:0.5px;margin-top:4px;">{label}</div>
+        {delta_html}
+    </div>
+    """
+
 col1, col2, col3, col4 = st.columns(4)
-for col, number, label in [
-    (col1, total_reporting_events, f"Conflict events ({reporting_period})"),
-    (col2, total_reporting_fatalities, f"Conflict fatalities ({reporting_period})"),
-    (col3, regions_affected, f"Regions affected ({reporting_period})"),
-    (col4, total_dataset_events, "Total events (12 months)"),
-]:
-    col.markdown(
-        f"""
-        <div style="background:#fff;border-radius:6px;padding:16px;text-align:center;
-                    box-shadow:0 1px 4px rgba(0,0,0,0.08);border-top:3px solid #c0392b;">
-            <div style="font-size:28px;font-weight:700;color:#1a2332;">{number:,}</div>
-            <div style="font-size:11px;color:#7f8c8d;text-transform:uppercase;
-                        letter-spacing:0.5px;margin-top:4px;">{label}</div>
-        </div>
-        """,
+col1.markdown(_stat_card(total_reporting_events, f"Conflict events ({reporting_period})", events_delta), unsafe_allow_html=True)
+col2.markdown(_stat_card(total_reporting_fatalities, f"Conflict fatalities ({reporting_period})", fatalities_delta), unsafe_allow_html=True)
+col3.markdown(_stat_card(regions_affected, f"Regions affected ({reporting_period})"), unsafe_allow_html=True)
+col4.markdown(_stat_card(total_dataset_events, "Total events (12 months)"), unsafe_allow_html=True)
+
+st.markdown("<div style='margin-top:12px'></div>", unsafe_allow_html=True)
+
+col5, col6 = st.columns(2)
+if national_percap is not None:
+    col5.markdown(
+        _stat_card(national_percap, "Per-capita conflict rate (national avg, per 100k)", accent="#2980b9", fmt="{:.1f}"),
+        unsafe_allow_html=True,
+    )
+if total_crisis is not None:
+    col6.markdown(
+        _stat_card(total_crisis, "IPC Phase 3+ population (crisis or worse)", accent="#e67e22"),
         unsafe_allow_html=True,
     )
 
@@ -170,6 +304,66 @@ fig_map.update_layout(
     )]
 )
 st.plotly_chart(fig_map, use_container_width=True)
+
+# ============================================================
+# ANALYTICAL BRIEF
+# ============================================================
+
+st.markdown("### Analytical Brief")
+
+for marker, (title, content) in sections.items():
+    if marker == "[OVERVIEW]":
+        continue  # already shown as executive summary
+    st.markdown(f"#### {title}")
+    if marker == "[REFERENCES]":
+        with st.expander("Show references"):
+            for line in content.split("\n"):
+                line = line.strip()
+                if line:
+                    st.markdown(f"`{line}`")
+    elif marker == "[WHAT TO WATCH]":
+        for line in content.split("\n"):
+            line = line.strip()
+            if not line:
+                continue
+            line = re.sub(r"^[\d]+[\.\)]\s*", "", line)
+            st.markdown(format_brief_html(line), unsafe_allow_html=True)
+    else:
+        for para in content.split("\n\n"):
+            para = para.strip()
+            if para:
+                st.markdown(format_brief_html(para.replace("\n", " ")), unsafe_allow_html=True)
+    st.markdown("---")
+
+# ============================================================
+# DOWNLOAD BUTTONS
+# ============================================================
+
+st.markdown("#### Download Brief")
+dl_col1, dl_col2, _ = st.columns([1, 1, 4])
+
+docx_path = "somalia_brief_march_2026.docx"
+html_path = "somalia_brief_march_2026.html"
+
+if os.path.exists(docx_path):
+    with open(docx_path, "rb") as f:
+        dl_col1.download_button(
+            label="Download Word (.docx)",
+            data=f.read(),
+            file_name=docx_path,
+            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        )
+
+if os.path.exists(html_path):
+    with open(html_path, "rb") as f:
+        dl_col2.download_button(
+            label="Download HTML",
+            data=f.read(),
+            file_name=html_path,
+            mime="text/html",
+        )
+
+st.markdown("<div style='margin-top:24px'></div>", unsafe_allow_html=True)
 
 # ============================================================
 # CHARTS (2x2)
@@ -260,7 +454,6 @@ if ipc_data:
         "Phase 1=Minimal, 2=Stressed, 3=Crisis, 4=Emergency, 5=Famine."
     )
 
-    total_crisis = sum(v.get("population_in_crisis") or 0 for v in ipc_data.values())
     total_emergency = sum(v.get("population_in_emergency") or 0 for v in ipc_data.values())
 
     col_ipc1, col_ipc2 = st.columns(2)
@@ -491,70 +684,6 @@ if data_quality:
         })
     df_dq = pd.DataFrame(dq_rows)
     st.dataframe(df_dq, use_container_width=True, hide_index=True)
-
-# ============================================================
-# ANALYTICAL BRIEF
-# ============================================================
-
-st.markdown("### Analytical Brief")
-
-SECTION_MARKERS = [
-    ("[OVERVIEW]", "Overview"),
-    ("[FORECAST REVIEW]", "Forecast Review"),
-    ("[DATA COVERAGE]", "Data Coverage"),
-    ("[THEMATIC ANALYSIS]", "Thematic Analysis"),
-    ("[GEOGRAPHIC FOCUS]", "Geographic Focus"),
-    ("[TRENDS AND OUTLOOK]", "Trends And Outlook"),
-    ("[WHAT TO WATCH]", "What To Watch"),
-    ("[REFERENCES]", "References"),
-]
-
-def extract_sections(text):
-    sections = {}
-    for marker, title in SECTION_MARKERS:
-        start = text.find(marker)
-        if start == -1:
-            continue
-        start += len(marker)
-        end = len(text)
-        for other_marker, _ in SECTION_MARKERS:
-            if other_marker == marker:
-                continue
-            pos = text.find(other_marker, start)
-            if pos != -1 and pos < end:
-                end = pos
-        sections[marker] = (title, text[start:end].strip())
-    return sections
-
-def format_brief_md(text):
-    text = re.sub(r'\*\*(.+?)\*\*', r'**\1**', text)
-    text = re.sub(r'\[Comment:(.*?)\]', lambda m: f'*[Comment:{m.group(1)}]*', text, flags=re.DOTALL)
-    text = re.sub(r'\[Assumption:(.*?)\]', lambda m: f'*[Assumption:{m.group(1)}]*', text, flags=re.DOTALL)
-    return text
-
-sections = extract_sections(brief_text)
-
-for marker, (title, content) in sections.items():
-    st.markdown(f"#### {title}")
-    if marker == "[REFERENCES]":
-        with st.expander("Show references"):
-            for line in content.split("\n"):
-                line = line.strip()
-                if line:
-                    st.markdown(f"`{line}`")
-    elif marker == "[WHAT TO WATCH]":
-        for line in content.split("\n"):
-            line = line.strip()
-            if not line:
-                continue
-            line = re.sub(r"^[\d]+[\.\)]\s*", "", line)
-            st.markdown(f"- {format_brief_md(line)}")
-    else:
-        for para in content.split("\n\n"):
-            para = para.strip()
-            if para:
-                st.markdown(format_brief_md(para.replace("\n", " ")))
-    st.markdown("---")
 
 # ============================================================
 # EVENT VERIFICATION

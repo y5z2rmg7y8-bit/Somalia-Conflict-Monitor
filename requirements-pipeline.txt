@@ -1,0 +1,8 @@
+requests
+pandas
+plotly
+streamlit
+anthropic
+python-dotenv
+openpyxl
+python-docx
