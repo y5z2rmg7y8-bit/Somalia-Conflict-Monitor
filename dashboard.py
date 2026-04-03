@@ -288,17 +288,23 @@ fig_map = px.scatter_mapbox(
     height=500,
 )
 fig_map.update_layout(
-    margin={"r": 220, "t": 0, "l": 0, "b": 0},
+    margin={"r": 10, "t": 0, "l": 0, "b": 60},
     legend_title_text="Event type",
-    legend=dict(x=1.02, y=1, xanchor="left", yanchor="top"),
+    legend=dict(
+        orientation="h",
+        yanchor="top",
+        y=-0.1,
+        xanchor="center",
+        x=0.5,
+    ),
     annotations=[dict(
-        text="*Strategic developments: non-violent<br>events including troop movements,<br>territorial transfers, ceasefires and<br>peace agreements.",
+        text="*Strategic developments: non-violent events including troop movements, territorial transfers, ceasefires and peace agreements.",
         xref="paper", yref="paper",
-        x=1.02, y=0.72,
-        xanchor="left", yanchor="top",
+        x=0.5, y=-0.2,
+        xanchor="center", yanchor="top",
         showarrow=False,
         font=dict(size=8, color="#7f8c8d"),
-        align="left",
+        align="center",
     )]
 )
 st.plotly_chart(fig_map, use_container_width=True)
@@ -358,7 +364,7 @@ with col_left:
     fig1.update_layout(
         margin={"t": 10, "b": 60},
         xaxis={"tickangle": -45, "tickfont": {"size": 9}},
-        legend={"orientation": "h", "y": -0.4, "font": {"size": 10}},
+        legend={"orientation": "h", "yanchor": "top", "y": -0.1, "xanchor": "center", "x": 0.5, "font": {"size": 10}},
     )
     st.plotly_chart(fig1, use_container_width=True)
 
@@ -462,7 +468,7 @@ if ipc_data:
         fig_ipc.update_layout(
             barmode="overlay", height=400,
             margin={"t": 10, "b": 40, "l": 10},
-            legend={"orientation": "h", "y": -0.2, "font": {"size": 10}},
+            legend={"orientation": "h", "yanchor": "top", "y": -0.1, "xanchor": "center", "x": 0.5, "font": {"size": 10}},
         )
         st.plotly_chart(fig_ipc, use_container_width=True)
 
@@ -504,8 +510,15 @@ if ipc_data:
                 height=400,
             )
             fig_ipc_map.update_layout(
-                margin={"r": 0, "t": 0, "l": 0, "b": 0},
+                margin={"r": 0, "t": 0, "l": 0, "b": 60},
                 legend_title_text="Dominant phase",
+                legend=dict(
+                    orientation="h",
+                    yanchor="top",
+                    y=-0.1,
+                    xanchor="center",
+                    x=0.5,
+                ),
             )
             st.plotly_chart(fig_ipc_map, use_container_width=True)
 
