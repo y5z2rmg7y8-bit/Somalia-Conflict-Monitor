@@ -1,13 +1,109 @@
 {
   "reporting_period": "March 2026",
-  "date_generated": "2026-04-03T15:28:04.815000",
-  "date_start": "2025-04-01",
+  "date_generated": "2026-04-03T17:09:13.621925",
+  "date_start": "2023-04-01",
   "date_end": "2026-03-31",
   "current_month_start": "2026-03-01",
-  "total_events": 6464,
+  "total_events": 13881,
   "reporting_month_events": 442,
   "total_fatalities_reporting_month": 530,
   "baseline_months": [
+    {
+      "label": "April 2023",
+      "events": 268
+    },
+    {
+      "label": "May 2023",
+      "events": 281
+    },
+    {
+      "label": "June 2023",
+      "events": 306
+    },
+    {
+      "label": "July 2023",
+      "events": 333
+    },
+    {
+      "label": "August 2023",
+      "events": 378
+    },
+    {
+      "label": "September 2023",
+      "events": 356
+    },
+    {
+      "label": "October 2023",
+      "events": 304
+    },
+    {
+      "label": "November 2023",
+      "events": 232
+    },
+    {
+      "label": "December 2023",
+      "events": 313
+    },
+    {
+      "label": "January 2024",
+      "events": 307
+    },
+    {
+      "label": "February 2024",
+      "events": 272
+    },
+    {
+      "label": "March 2024",
+      "events": 284
+    },
+    {
+      "label": "April 2024",
+      "events": 260
+    },
+    {
+      "label": "May 2024",
+      "events": 237
+    },
+    {
+      "label": "June 2024",
+      "events": 275
+    },
+    {
+      "label": "July 2024",
+      "events": 309
+    },
+    {
+      "label": "August 2024",
+      "events": 302
+    },
+    {
+      "label": "September 2024",
+      "events": 299
+    },
+    {
+      "label": "October 2024",
+      "events": 315
+    },
+    {
+      "label": "November 2024",
+      "events": 284
+    },
+    {
+      "label": "December 2024",
+      "events": 312
+    },
+    {
+      "label": "January 2025",
+      "events": 327
+    },
+    {
+      "label": "February 2025",
+      "events": 397
+    },
+    {
+      "label": "March 2025",
+      "events": 466
+    },
     {
       "label": "April 2025",
       "events": 309
@@ -612,6 +708,38 @@
       "idps": 126463,
       "reporting_date": "2025-09-30",
       "source": "UNHCR/OCHA Harmonised"
+    }
+  },
+  "data_quality": {
+    "ACLED": {
+      "description": "Event-level conflict and political violence data",
+      "vintage": "2026-03-31",
+      "update_frequency": "Weekly",
+      "coverage": "13,881 events, 19 admin1 regions, 2023-04-01 to 2026-03-31"
+    },
+    "IPC": {
+      "description": "Food security phase classifications by admin1",
+      "vintage": "2026-01-01",
+      "update_frequency": "Biannual",
+      "coverage": "18 regions"
+    },
+    "CHIRPS": {
+      "description": "Dekadal rainfall anomaly vs 1989\u20132018 baseline",
+      "vintage": "2026-04-01",
+      "update_frequency": "Dekadal (10-day)",
+      "coverage": "18 regions"
+    },
+    "WorldPop/UNFPA": {
+      "description": "Population projections by admin1 region",
+      "vintage": "2021 projections",
+      "update_frequency": "Annual",
+      "coverage": "18 regions"
+    },
+    "IOM DTM / OCHA": {
+      "description": "Harmonised IDP figures by admin1 region",
+      "vintage": "2025-09-30",
+      "update_frequency": "Irregular",
+      "coverage": "17 regions"
     }
   }
 }

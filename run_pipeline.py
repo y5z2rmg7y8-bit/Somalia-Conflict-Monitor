@@ -8,6 +8,7 @@ from data_ipc import get_ipc_summary, format_ipc_for_prompt
 from data_rainfall import get_rainfall_summary, format_rainfall_for_prompt
 from data_population import get_population_summary, compute_per_capita, format_population_for_prompt
 from data_displacement import get_displacement_summary, format_displacement_for_prompt
+from post_processing import filter_superlatives
 import os
 import json
 from datetime import datetime
@@ -22,7 +23,7 @@ anthropic_key = os.getenv("ANTHROPIC_API_KEY")
 # CONFIGURATION - change these for different reporting periods
 # ============================================================
 REPORTING_PERIOD = "March 2026"
-DATE_START = "2025-04-01"
+DATE_START = "2023-04-01"
 DATE_END = "2026-03-31"
 CURRENT_MONTH_START = "2026-03-01"
 
@@ -234,6 +235,7 @@ The reporting period is the most recent month in the dataset ONLY. You will rece
 3. Context notes with terminology and actor definitions.
 4. Previous month's predictions for review (if available).
 You do NOT have event-level data for baseline months. Do not reference specific baseline events, event IDs, locations or actors. You may only reference baseline months through their aggregate statistics when making month-on-month comparisons.
+You have 36 months of baseline data (3 years). Use this to identify seasonal patterns, particularly around Gu (April–June) and Deyr (October–December) rainy seasons. If a current trend mirrors a seasonal pattern from previous years, note this explicitly.
 
 STRUCTURE:
 1. Overview: One paragraph, three to four sentences maximum. State the single most important development or shift visible in the reporting month's data and its operational implication. Derive this from the event data, not from external assumptions.
@@ -378,6 +380,7 @@ response = client.messages.create(
 )
 
 brief_text = response.content[0].text
+brief_text = filter_superlatives(brief_text, dataset_start=DATE_START)
 print("Brief generated.")
 
 # Print brief to terminal
@@ -400,9 +403,43 @@ print("\n[4/6] Creating Word document...")
 docx_filename = f"somalia_brief_{REPORTING_PERIOD.lower().replace(' ', '_')}.docx"
 create_brief_docx(brief_text, df, REPORTING_PERIOD, docx_filename)
 
+# Data quality summary (computed before HTML and metadata)
+data_quality = {
+    "ACLED": {
+        "description": "Event-level conflict and political violence data",
+        "vintage": DATE_END,
+        "update_frequency": "Weekly",
+        "coverage": f"{len(df):,} events, {df['admin1'].nunique()} admin1 regions, {DATE_START} to {DATE_END}",
+    },
+    "IPC": {
+        "description": "Food security phase classifications by admin1",
+        "vintage": (next(iter(ipc_data.values())).get("analysis_date", "unknown") if ipc_data else "unavailable"),
+        "update_frequency": "Biannual",
+        "coverage": f"{len(ipc_data)} regions" if ipc_data else "unavailable",
+    },
+    "CHIRPS": {
+        "description": "Dekadal rainfall anomaly vs 1989–2018 baseline",
+        "vintage": (next(iter(rainfall_data.values())).get("date", "unknown") if rainfall_data else "unavailable"),
+        "update_frequency": "Dekadal (10-day)",
+        "coverage": f"{len(rainfall_data)} regions" if rainfall_data else "unavailable",
+    },
+    "WorldPop/UNFPA": {
+        "description": "Population projections by admin1 region",
+        "vintage": "2021 projections",
+        "update_frequency": "Annual",
+        "coverage": f"{len(population_data)} regions" if population_data else "unavailable",
+    },
+    "IOM DTM / OCHA": {
+        "description": "Harmonised IDP figures by admin1 region",
+        "vintage": (next(iter(displacement_data.values())).get("reporting_date", "unknown") if displacement_data else "unavailable"),
+        "update_frequency": "Irregular",
+        "coverage": f"{len(displacement_data)} regions" if displacement_data else "unavailable",
+    },
+}
+
 print("\n[5/6] Creating HTML brief...")
 html_filename = f"somalia_brief_{REPORTING_PERIOD.lower().replace(' ', '_')}.html"
-create_brief_html(brief_text, df, REPORTING_PERIOD, html_filename, monthly_baselines=monthly_baselines, current_month_start=CURRENT_MONTH_START, ipc_data=ipc_data, rainfall_data=rainfall_data, per_capita_data=per_capita_data, displacement_data=displacement_data)
+create_brief_html(brief_text, df, REPORTING_PERIOD, html_filename, monthly_baselines=monthly_baselines, current_month_start=CURRENT_MONTH_START, ipc_data=ipc_data, rainfall_data=rainfall_data, per_capita_data=per_capita_data, displacement_data=displacement_data, data_quality=data_quality)
 
 print("\n[6/6] Saving data...")
 df.to_csv("acled_data.csv", index=False)
@@ -433,6 +470,7 @@ metadata = {
     "rainfall_data": rainfall_data,
     "per_capita_data": per_capita_data,
     "displacement_data": displacement_data,
+    "data_quality": data_quality,
 }
 with open("brief_metadata.json", "w") as f:
     json.dump(metadata, f, indent=2)

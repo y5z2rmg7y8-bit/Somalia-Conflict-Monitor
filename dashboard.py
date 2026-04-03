@@ -41,6 +41,7 @@ ipc_data = metadata.get("ipc_data", {})
 rainfall_data = metadata.get("rainfall_data", {})
 per_capita_data = metadata.get("per_capita_data", {})
 displacement_data = metadata.get("displacement_data", {})
+data_quality = metadata.get("data_quality", {})
 
 df_reporting = df_full[df_full["event_date"] >= current_month_start].copy()
 
@@ -166,10 +167,11 @@ st.caption("*Strategic developments: non-violent events including troop movement
 st.markdown("### Data Charts")
 col_left, col_right = st.columns(2)
 
-# Chart 1: Events by type per month — all 12 months
+# Chart 1: Events by type per month — all months (line chart for readability at 36 months)
 with col_left:
-    st.markdown("**Events By Type — All 12 Months**")
     month_starts_list = pd.date_range(start=date_start, end=df_full["event_date"].max(), freq="MS")
+    n_months = len(month_starts_list)
+    st.markdown(f"**Events By Type — Monthly Trend ({n_months} Months)**")
     type_rows = []
     for ms in month_starts_list:
         me = ms + pd.offsets.MonthEnd(1)
@@ -179,13 +181,18 @@ with col_left:
             type_rows.append({"Month": lbl, "Type": chart_label(etype), "Count": int((subset["event_type"] == etype).sum())})
     df_type_month = pd.DataFrame(type_rows)
     month_order = [ms.strftime("%b %y") for ms in month_starts_list]
-    fig1 = px.bar(
+    fig1 = px.line(
         df_type_month, x="Month", y="Count", color="Type",
         color_discrete_map=chart_colour_map,
-        barmode="stack", height=320,
+        height=320, markers=True,
         category_orders={"Month": month_order},
     )
-    fig1.update_layout(margin={"t": 10, "b": 40}, legend={"orientation": "h", "y": -0.3, "font": {"size": 10}})
+    fig1.update_traces(marker={"size": 4})
+    fig1.update_layout(
+        margin={"t": 10, "b": 60},
+        xaxis={"tickangle": -45, "tickfont": {"size": 9}},
+        legend={"orientation": "h", "y": -0.4, "font": {"size": 10}},
+    )
     st.plotly_chart(fig1, use_container_width=True)
 
 # Chart 2: Events by actor — reporting month, top 10
@@ -457,6 +464,24 @@ if displacement_data:
         st.plotly_chart(fig_disp, use_container_width=True)
 
 # ============================================================
+# DATA QUALITY
+# ============================================================
+
+if data_quality:
+    st.markdown("### Data Quality")
+    dq_rows = []
+    for source, info in data_quality.items():
+        dq_rows.append({
+            "Source": source,
+            "Description": info.get("description", ""),
+            "Data vintage": info.get("vintage", ""),
+            "Update frequency": info.get("update_frequency", ""),
+            "Coverage": info.get("coverage", ""),
+        })
+    df_dq = pd.DataFrame(dq_rows)
+    st.dataframe(df_dq, use_container_width=True, hide_index=True)
+
+# ============================================================
 # ANALYTICAL BRIEF
 # ============================================================
 
@@ -519,6 +544,70 @@ for marker, (title, content) in sections.items():
             if para:
                 st.markdown(format_brief_md(para.replace("\n", " ")))
     st.markdown("---")
+
+# ============================================================
+# METHODOLOGY
+# ============================================================
+
+# ============================================================
+# EVENT VERIFICATION
+# ============================================================
+
+st.markdown("### Event Verification")
+st.caption("Spot-check claims in the analytical brief against raw ACLED event records.")
+
+ref_start = brief_text.find("[REFERENCES]")
+if ref_start == -1:
+    st.info("No references section found in this brief.")
+else:
+    ref_section = brief_text[ref_start + len("[REFERENCES]"):].strip()
+
+    footnote_map = {}
+    for line in ref_section.split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        m = re.match(r'^(\d+)[.\)]\s+(.+)$', line)
+        if m:
+            fn_num = int(m.group(1))
+            event_ids = re.findall(r'SOM[\w-]+', m.group(2))
+            if event_ids:
+                footnote_map[fn_num] = event_ids
+
+    if not footnote_map:
+        st.info("No ACLED event IDs found in the references section.")
+    else:
+        col_ver1, col_ver2 = st.columns([2, 3])
+        with col_ver1:
+            selected_fn = st.selectbox(
+                "Select footnote",
+                options=sorted(footnote_map.keys()),
+                format_func=lambda n: f"Footnote {n} — {', '.join(footnote_map[n])}",
+            )
+
+        if selected_fn is not None:
+            event_ids = footnote_map[selected_fn]
+            st.markdown(f"**Footnote {selected_fn}:** {', '.join(event_ids)}")
+
+            display_cols = [
+                "event_id_cnty", "event_date", "event_type", "sub_event_type",
+                "actor1", "actor2", "admin1", "admin2", "location", "fatalities",
+            ]
+
+            for eid in event_ids:
+                mask = df_full["event_id_cnty"] == eid
+                if not mask.any():
+                    eid_clean = eid.replace("-", "")
+                    mask = df_full["event_id_cnty"].str.replace("-", "", regex=False) == eid_clean
+                if mask.any():
+                    record = df_full[mask].iloc[0]
+                    available = [c for c in display_cols if c in df_full.columns]
+                    st.dataframe(record[available].to_frame().T, use_container_width=True, hide_index=True)
+                    if "notes" in df_full.columns and pd.notna(record.get("notes", "")):
+                        st.markdown(f"**Notes:** {record['notes']}")
+                    st.divider()
+                else:
+                    st.warning(f"Event ID `{eid}` not found in dataset.")
 
 # ============================================================
 # METHODOLOGY

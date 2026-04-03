@@ -6,7 +6,8 @@ from datetime import datetime
 
 def create_brief_html(brief_text, df, reporting_period="March 2026",
                        output_path="somalia_brief.html", monthly_baselines=None, current_month_start=None,
-                       ipc_data=None, rainfall_data=None, per_capita_data=None, displacement_data=None):
+                       ipc_data=None, rainfall_data=None, per_capita_data=None, displacement_data=None,
+                       data_quality=None):
     """Create a standalone HTML file with brief, map and charts."""
 
     df = df.copy()
@@ -71,6 +72,42 @@ def create_brief_html(brief_text, df, reporting_period="March 2026",
     region_data = [{"region": r, "count": int(c)} for r, c in region_counts.items()]
 
     brief_html = format_brief_html(brief_text)
+
+    # Data quality table HTML
+    dq_html = ""
+    if data_quality:
+        rows_html = ""
+        for source, info in data_quality.items():
+            rows_html += (
+                f'<tr><td style="font-weight:600;white-space:nowrap;">{source}</td>'
+                f'<td>{info.get("description","")}</td>'
+                f'<td style="white-space:nowrap;">{info.get("vintage","")}</td>'
+                f'<td style="white-space:nowrap;">{info.get("update_frequency","")}</td>'
+                f'<td>{info.get("coverage","")}</td></tr>\n'
+            )
+        dq_html = f"""
+    <div class="grid">
+        <div class="card grid-full">
+            <div class="card-header">Data quality</div>
+            <div class="card-body">
+                <table style="width:100%;border-collapse:collapse;font-size:12px;">
+                    <thead>
+                        <tr style="border-bottom:2px solid #1a2332;text-align:left;">
+                            <th style="padding:6px 8px;">Source</th>
+                            <th style="padding:6px 8px;">Description</th>
+                            <th style="padding:6px 8px;">Data vintage</th>
+                            <th style="padding:6px 8px;">Update frequency</th>
+                            <th style="padding:6px 8px;">Coverage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows_html}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+"""
 
     # IPC chart data
     ipc_chart_data = []
@@ -371,7 +408,7 @@ def create_brief_html(brief_text, df, reporting_period="March 2026",
 
     <div class="grid">
         <div class="card">
-            <div class="card-header">Events by type (monthly comparison)</div>
+            <div class="card-header">Events by type — monthly trend ({len(all_chart_months)} months)</div>
             <div class="card-body"><div id="chart-type"></div></div>
         </div>
         <div class="card">
@@ -449,6 +486,8 @@ def create_brief_html(brief_text, df, reporting_period="March 2026",
     </div>
     '''}
 
+    {dq_html}
+
     <div class="grid">
         <div class="card grid-full">
             <div class="card-header">Analytical brief</div>
@@ -514,12 +553,15 @@ Plotly.newPlot('chart-type', types.map(function(t) {{
     return {{
         x: months,
         y: months.map(m => {{ var i = typeData.find(d => d.month === m && d.type === t); return i ? i.count : 0; }}),
-        name: t, type: 'bar', marker: {{ color: colourMap[t] || '#999' }}
+        name: t, type: 'scatter', mode: 'lines+markers',
+        line: {{ color: colourMap[t] || '#999', width: 2 }},
+        marker: {{ color: colourMap[t] || '#999', size: 4 }}
     }};
 }}), {{
-    barmode: 'stack', margin: {{ t: 10, b: 40, l: 40, r: 10 }}, height: 300,
+    margin: {{ t: 10, b: 70, l: 40, r: 10 }}, height: 320,
     font: {{ family: 'Segoe UI, Arial', size: 11 }},
-    legend: {{ orientation: 'h', y: -0.2, font: {{ size: 10 }} }},
+    xaxis: {{ tickangle: -45, tickfont: {{ size: 9 }} }},
+    legend: {{ orientation: 'h', y: -0.35, font: {{ size: 10 }} }},
     plot_bgcolor: 'rgba(0,0,0,0)', paper_bgcolor: 'rgba(0,0,0,0)'
 }}, {{ responsive: true }});
 
