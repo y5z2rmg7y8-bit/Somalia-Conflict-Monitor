@@ -293,7 +293,7 @@ fig_map = px.scatter_mapbox(
     height=500,
 )
 fig_map.update_layout(
-    margin={"r": 10, "t": 0, "l": 0, "b": 90},
+    margin={"r": 10, "t": 0, "l": 0, "b": 120},
     legend_title_text="Event type",
     legend=dict(
         orientation="h",
@@ -305,7 +305,7 @@ fig_map.update_layout(
     annotations=[dict(
         text="*Strategic developments: non-violent events including troop movements, territorial transfers, ceasefires and peace agreements.",
         xref="paper", yref="paper",
-        x=0.5, y=-0.14,
+        x=0.5, y=-0.22,
         xanchor="center", yanchor="top",
         showarrow=False,
         font=dict(size=10, color="#7f8c8d"),
