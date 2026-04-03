@@ -1,0 +1,31 @@
+# Environment
+.env
+.env.*
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Stray / temp files
+.e
+~$*
+.claude/
+
+# Pipeline outputs (generated files, not source)
+previous_predictions.txt
+somalia_brief_*.docx
+somalia_brief_*.html
+streamlit.log
+nohup.out

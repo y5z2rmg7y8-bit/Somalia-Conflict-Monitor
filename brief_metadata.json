@@ -1,0 +1,617 @@
+{
+  "reporting_period": "March 2026",
+  "date_generated": "2026-04-03T15:28:04.815000",
+  "date_start": "2025-04-01",
+  "date_end": "2026-03-31",
+  "current_month_start": "2026-03-01",
+  "total_events": 6464,
+  "reporting_month_events": 442,
+  "total_fatalities_reporting_month": 530,
+  "baseline_months": [
+    {
+      "label": "April 2025",
+      "events": 309
+    },
+    {
+      "label": "May 2025",
+      "events": 298
+    },
+    {
+      "label": "June 2025",
+      "events": 611
+    },
+    {
+      "label": "July 2025",
+      "events": 641
+    },
+    {
+      "label": "August 2025",
+      "events": 619
+    },
+    {
+      "label": "September 2025",
+      "events": 558
+    },
+    {
+      "label": "October 2025",
+      "events": 595
+    },
+    {
+      "label": "November 2025",
+      "events": 558
+    },
+    {
+      "label": "December 2025",
+      "events": 705
+    },
+    {
+      "label": "January 2026",
+      "events": 630
+    },
+    {
+      "label": "February 2026",
+      "events": 498
+    }
+  ],
+  "ipc_data": {
+    "Awdal": {
+      "ipc_region": "Awdal",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 86543,
+      "population_in_emergency": 10948,
+      "population_in_famine": 0
+    },
+    "Bakool": {
+      "ipc_region": "Bakool",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 134811,
+      "population_in_emergency": 28493,
+      "population_in_famine": 0
+    },
+    "Banadir": {
+      "ipc_region": "Banadir",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 355069,
+      "population_in_emergency": 55464,
+      "population_in_famine": 0
+    },
+    "Bari": {
+      "ipc_region": "Bari",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 430730,
+      "population_in_emergency": 112458,
+      "population_in_famine": 0
+    },
+    "Bay": {
+      "ipc_region": "Bay",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 516904,
+      "population_in_emergency": 192174,
+      "population_in_famine": 0
+    },
+    "Galgaduud": {
+      "ipc_region": "Galgaduud",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 341927,
+      "population_in_emergency": 94876,
+      "population_in_famine": 0
+    },
+    "Gedo": {
+      "ipc_region": "Gedo",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 171897,
+      "population_in_emergency": 41233,
+      "population_in_famine": 0
+    },
+    "Hiraan": {
+      "ipc_region": "Hiraan",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 113330,
+      "population_in_emergency": 22032,
+      "population_in_famine": 0
+    },
+    "Lower Juba": {
+      "ipc_region": "Lower Juba",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 225197,
+      "population_in_emergency": 44376,
+      "population_in_famine": 0
+    },
+    "Lower Shabelle": {
+      "ipc_region": "Lower Shabelle",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 448800,
+      "population_in_emergency": 74119,
+      "population_in_famine": 0
+    },
+    "Middle Juba": {
+      "ipc_region": "Middle Juba",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 78137,
+      "population_in_emergency": 17121,
+      "population_in_famine": 0
+    },
+    "Middle Shabelle": {
+      "ipc_region": "Middle Shabelle",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 267958,
+      "population_in_emergency": 54957,
+      "population_in_famine": 0
+    },
+    "Mudug": {
+      "ipc_region": "Mudug",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 660696,
+      "population_in_emergency": 173355,
+      "population_in_famine": 0
+    },
+    "Nugaal": {
+      "ipc_region": "Nugaal",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 249910,
+      "population_in_emergency": 62444,
+      "population_in_famine": 0
+    },
+    "Sanaag": {
+      "ipc_region": "Sanaag",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 157824,
+      "population_in_emergency": 45598,
+      "population_in_famine": 0
+    },
+    "Sool": {
+      "ipc_region": "Sool",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 186961,
+      "population_in_emergency": 56701,
+      "population_in_famine": 0
+    },
+    "Togdheer": {
+      "ipc_region": "Togdheer",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 154184,
+      "population_in_emergency": 33907,
+      "population_in_famine": 0
+    },
+    "Woqooyi Galbeed": {
+      "ipc_region": "Woqooyi Galbeed",
+      "analysis_date": "2026-01-01",
+      "validity_from": "2026-01-01",
+      "validity_to": "2026-01-31",
+      "dominant_phase": 4,
+      "population_in_crisis": 215950,
+      "population_in_emergency": 42915,
+      "population_in_famine": 0
+    }
+  },
+  "rainfall_data": {
+    "Awdal": {
+      "pcode": "SO11",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 125.1,
+      "r1q": 148.2,
+      "rfq": 92.4,
+      "status": "above average"
+    },
+    "Bakool": {
+      "pcode": "SO25",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 89.4,
+      "r1q": 90.7,
+      "rfq": 30.0,
+      "status": "below average"
+    },
+    "Bari": {
+      "pcode": "SO16",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 91.8,
+      "r1q": 92.5,
+      "rfq": 50.0,
+      "status": "below average"
+    },
+    "Bay": {
+      "pcode": "SO24",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 73.7,
+      "r1q": 73.2,
+      "rfq": 41.3,
+      "status": "drought"
+    },
+    "Banadir": {
+      "pcode": "SO22",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 58.5,
+      "r1q": 47.4,
+      "rfq": 30.8,
+      "status": "severe drought"
+    },
+    "Galgaduud": {
+      "pcode": "SO19",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 65.2,
+      "r1q": 59.9,
+      "rfq": 27.8,
+      "status": "drought"
+    },
+    "Gedo": {
+      "pcode": "SO26",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 149.7,
+      "r1q": 152.6,
+      "rfq": 50.2,
+      "status": "heavy rainfall"
+    },
+    "Hiraan": {
+      "pcode": "SO20",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 57.0,
+      "r1q": 52.1,
+      "rfq": 26.2,
+      "status": "severe drought"
+    },
+    "Lower Juba": {
+      "pcode": "SO28",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 102.6,
+      "r1q": 80.7,
+      "rfq": 27.1,
+      "status": "normal"
+    },
+    "Lower Shabelle": {
+      "pcode": "SO23",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 51.9,
+      "r1q": 49.1,
+      "rfq": 26.7,
+      "status": "severe drought"
+    },
+    "Middle Juba": {
+      "pcode": "SO27",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 76.0,
+      "r1q": 71.9,
+      "rfq": 34.9,
+      "status": "drought"
+    },
+    "Middle Shabelle": {
+      "pcode": "SO21",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 63.0,
+      "r1q": 48.9,
+      "rfq": 28.0,
+      "status": "drought"
+    },
+    "Mudug": {
+      "pcode": "SO18",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 75.0,
+      "r1q": 72.8,
+      "rfq": 34.4,
+      "status": "drought"
+    },
+    "Nugaal": {
+      "pcode": "SO17",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 96.5,
+      "r1q": 97.6,
+      "rfq": 51.3,
+      "status": "normal"
+    },
+    "Sanaag": {
+      "pcode": "SO15",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 118.9,
+      "r1q": 132.4,
+      "rfq": 89.0,
+      "status": "above average"
+    },
+    "Sool": {
+      "pcode": "SO14",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 89.7,
+      "r1q": 91.3,
+      "rfq": 51.1,
+      "status": "below average"
+    },
+    "Togdheer": {
+      "pcode": "SO13",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 121.3,
+      "r1q": 130.5,
+      "rfq": 59.7,
+      "status": "above average"
+    },
+    "Woqooyi Galbeed": {
+      "pcode": "SO12",
+      "date": "2026-04-01",
+      "version": "forecast",
+      "r3q": 133.6,
+      "r1q": 145.4,
+      "rfq": 94.7,
+      "status": "heavy rainfall"
+    }
+  },
+  "per_capita_data": {
+    "Awdal": {
+      "population": 538209,
+      "events": 6,
+      "fatalities": 0,
+      "events_per_100k": 1.1,
+      "fatalities_per_100k": 0.0
+    },
+    "Woqooyi Galbeed": {
+      "population": 1224715,
+      "events": 2,
+      "fatalities": 0,
+      "events_per_100k": 0.2,
+      "fatalities_per_100k": 0.0
+    },
+    "Togdheer": {
+      "population": 728224,
+      "events": 2,
+      "fatalities": 1,
+      "events_per_100k": 0.3,
+      "fatalities_per_100k": 0.1
+    },
+    "Sool": {
+      "population": 464487,
+      "events": 1,
+      "fatalities": 0,
+      "events_per_100k": 0.2,
+      "fatalities_per_100k": 0.0
+    },
+    "Sanaag": {
+      "population": 362723,
+      "events": 23,
+      "fatalities": 17,
+      "events_per_100k": 6.3,
+      "fatalities_per_100k": 4.7
+    },
+    "Bari": {
+      "population": 1042591,
+      "events": 44,
+      "fatalities": 14,
+      "events_per_100k": 4.2,
+      "fatalities_per_100k": 1.3
+    },
+    "Nugaal": {
+      "population": 534574,
+      "events": 0,
+      "fatalities": 0,
+      "events_per_100k": 0.0,
+      "fatalities_per_100k": 0.0
+    },
+    "Mudug": {
+      "population": 1244026,
+      "events": 15,
+      "fatalities": 138,
+      "events_per_100k": 1.2,
+      "fatalities_per_100k": 11.1
+    },
+    "Galgaduud": {
+      "population": 687573,
+      "events": 27,
+      "fatalities": 4,
+      "events_per_100k": 3.9,
+      "fatalities_per_100k": 0.6
+    },
+    "Hiraan": {
+      "population": 427124,
+      "events": 40,
+      "fatalities": 26,
+      "events_per_100k": 9.4,
+      "fatalities_per_100k": 6.1
+    },
+    "Middle Shabelle": {
+      "population": 857395,
+      "events": 42,
+      "fatalities": 54,
+      "events_per_100k": 4.9,
+      "fatalities_per_100k": 6.3
+    },
+    "Banadir": {
+      "population": 2683312,
+      "events": 27,
+      "fatalities": 6,
+      "events_per_100k": 1.0,
+      "fatalities_per_100k": 0.2
+    },
+    "Lower Shabelle": {
+      "population": 1347933,
+      "events": 97,
+      "fatalities": 192,
+      "events_per_100k": 7.2,
+      "fatalities_per_100k": 14.2
+    },
+    "Bay": {
+      "population": 1055913,
+      "events": 41,
+      "fatalities": 15,
+      "events_per_100k": 3.9,
+      "fatalities_per_100k": 1.4
+    },
+    "Bakool": {
+      "population": 459747,
+      "events": 15,
+      "fatalities": 8,
+      "events_per_100k": 3.3,
+      "fatalities_per_100k": 1.7
+    },
+    "Gedo": {
+      "population": 736704,
+      "events": 14,
+      "fatalities": 7,
+      "events_per_100k": 1.9,
+      "fatalities_per_100k": 1.0
+    },
+    "Middle Juba": {
+      "population": 363930,
+      "events": 17,
+      "fatalities": 34,
+      "events_per_100k": 4.7,
+      "fatalities_per_100k": 9.3
+    },
+    "Lower Juba": {
+      "population": 979998,
+      "events": 28,
+      "fatalities": 14,
+      "events_per_100k": 2.9,
+      "fatalities_per_100k": 1.4
+    }
+  },
+  "displacement_data": {
+    "Awdal": {
+      "idps": 55552,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Bakool": {
+      "idps": 69921,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Banadir": {
+      "idps": 1109273,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Bari": {
+      "idps": 112829,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Bay": {
+      "idps": 591660,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Galgaduud": {
+      "idps": 86083,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Gedo": {
+      "idps": 304711,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Hiraan": {
+      "idps": 85373,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Lower Juba": {
+      "idps": 262111,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Lower Shabelle": {
+      "idps": 95994,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Middle Shabelle": {
+      "idps": 81368,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Mudug": {
+      "idps": 131390,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Nugaal": {
+      "idps": 58081,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Sanaag": {
+      "idps": 24580,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Sool": {
+      "idps": 36437,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Togdheer": {
+      "idps": 115582,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    },
+    "Woqooyi Galbeed": {
+      "idps": 126463,
+      "reporting_date": "2025-09-30",
+      "source": "UNHCR/OCHA Harmonised"
+    }
+  }
+}
