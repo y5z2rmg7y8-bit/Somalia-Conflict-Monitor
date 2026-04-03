@@ -116,7 +116,6 @@ st.markdown("<div style='margin-top:24px'></div>", unsafe_allow_html=True)
 # ============================================================
 
 st.markdown("### Conflict Event Map")
-st.caption("Note: 'Strategic developments' in ACLED captures non-violent events with political or military significance, including troop movements, territorial transfers, ceasefires and peace agreements.")
 
 df_map = df_reporting.copy()
 df_map["event_type_label"] = df_map["event_type"].map(chart_label)
@@ -156,9 +155,22 @@ fig_map = px.scatter_mapbox(
     mapbox_style="open-street-map",
     height=500,
 )
-fig_map.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0}, legend_title_text="Event type")
+fig_map.update_layout(
+    margin={"r": 0, "t": 0, "l": 0, "b": 0},
+    legend_title_text="Event type",
+    annotations=[dict(
+        text="*Strategic developments: non-violent events including<br>troop movements, territorial transfers, ceasefires and peace agreements.",
+        xref="paper", yref="paper",
+        x=0.99, y=0.01,
+        xanchor="right", yanchor="bottom",
+        showarrow=False,
+        font=dict(size=8, color="#555555"),
+        align="right",
+        bgcolor="rgba(255,255,255,0.75)",
+        borderpad=3,
+    )]
+)
 st.plotly_chart(fig_map, use_container_width=True)
-st.caption("*Strategic developments: non-violent events including troop movements, territorial transfers, ceasefires and peace agreements.")
 
 # ============================================================
 # CHARTS (2x2)
@@ -546,158 +558,137 @@ for marker, (title, content) in sections.items():
     st.markdown("---")
 
 # ============================================================
-# METHODOLOGY
-# ============================================================
-
-# ============================================================
 # EVENT VERIFICATION
 # ============================================================
 
-st.markdown("### Event Verification")
-st.caption("Spot-check claims in the analytical brief against raw ACLED event records.")
-
-ref_start = brief_text.find("[REFERENCES]")
-if ref_start == -1:
-    st.info("No references section found in this brief.")
-else:
-    ref_section = brief_text[ref_start + len("[REFERENCES]"):].strip()
-
-    def _parse_ref(raw):
-        """Classify a reference string and extract key fields."""
-        raw = raw.strip()
-        # ACLED: starts with SOM...
-        acled_ids = re.findall(r'SOM[\w-]+', raw)
-        if acled_ids:
-            return {"type": "acled", "ids": acled_ids, "raw": raw}
-        rl = raw.lower()
-        # IPC
-        if rl.startswith("ipc"):
-            region = _extract_last_comma_part(raw)
-            return {"type": "ipc", "region": region, "raw": raw}
-        # CHIRPS
-        if "chirps" in rl:
-            region = _extract_last_comma_part(raw)
-            return {"type": "chirps", "region": region, "raw": raw}
-        # Population / WorldPop / UNFPA
-        if any(k in rl for k in ("unfpa", "worldpop", "population estimate")):
-            region = _extract_last_comma_part(raw)
-            return {"type": "population", "region": region, "raw": raw}
-        # Displacement / IOM DTM
-        if any(k in rl for k in ("iom dtm", "harmonised idp", "idp figures")):
-            region = _extract_last_comma_part(raw)
-            return {"type": "displacement", "region": region, "raw": raw}
-        return {"type": "other", "raw": raw}
-
-    def _extract_last_comma_part(s):
-        """Return the last comma-separated token, trimmed — usually the region name."""
+def _parse_ref(raw):
+    raw = raw.strip()
+    acled_ids = re.findall(r'SOM[\w-]+', raw)
+    if acled_ids:
+        return {"type": "acled", "ids": acled_ids, "raw": raw}
+    rl = raw.lower()
+    def _last_part(s):
         parts = s.split(",")
         return parts[-1].strip() if parts else ""
+    if rl.startswith("ipc"):
+        return {"type": "ipc", "region": _last_part(raw), "raw": raw}
+    if "chirps" in rl:
+        return {"type": "chirps", "region": _last_part(raw), "raw": raw}
+    if any(k in rl for k in ("unfpa", "worldpop", "population estimate")):
+        return {"type": "population", "region": _last_part(raw), "raw": raw}
+    if any(k in rl for k in ("iom dtm", "harmonised idp", "idp figures")):
+        return {"type": "displacement", "region": _last_part(raw), "raw": raw}
+    return {"type": "other", "raw": raw}
 
-    footnote_map = {}
-    for line in ref_section.split("\n"):
-        line = line.strip()
-        if not line:
-            continue
-        m = re.match(r'^(\d+)[.\)]\s+(.+)$', line)
-        if m:
-            fn_num = int(m.group(1))
-            parsed = _parse_ref(m.group(2))
-            footnote_map[fn_num] = parsed
-
-    if not footnote_map:
-        st.info("No references found in the references section.")
+with st.expander("Event Verification"):
+    st.caption("Spot-check claims in the analytical brief against raw ACLED event records.")
+    ref_start = brief_text.find("[REFERENCES]")
+    if ref_start == -1:
+        st.info("No references section found in this brief.")
     else:
-        col_ver1, col_ver2 = st.columns([2, 3])
-        with col_ver1:
-            selected_fn = st.selectbox(
-                "Select footnote",
-                options=sorted(footnote_map.keys()),
-                format_func=lambda n: f"Footnote {n} — {footnote_map[n]['raw'][:60]}",
-            )
+        ref_section = brief_text[ref_start + len("[REFERENCES]"):].strip()
+        footnote_map = {}
+        for line in ref_section.split("\n"):
+            line = line.strip()
+            if not line:
+                continue
+            m = re.match(r'^(\d+)[.\)]\s+(.+)$', line)
+            if m:
+                fn_num = int(m.group(1))
+                footnote_map[fn_num] = _parse_ref(m.group(2))
 
-        if selected_fn is not None:
-            ref = footnote_map[selected_fn]
-            st.markdown(f"**Footnote {selected_fn}:** {ref['raw']}")
+        if not footnote_map:
+            st.info("No references found in the references section.")
+        else:
+            col_ver1, col_ver2 = st.columns([2, 3])
+            with col_ver1:
+                selected_fn = st.selectbox(
+                    "Select footnote",
+                    options=sorted(footnote_map.keys()),
+                    format_func=lambda n: f"Footnote {n} — {footnote_map[n]['raw'][:60]}",
+                )
 
-            if ref["type"] == "acled":
-                # Show ACLED event record(s)
-                display_cols = [
-                    "event_id_cnty", "event_date", "event_type", "sub_event_type",
-                    "actor1", "actor2", "admin1", "admin2", "location", "fatalities",
-                ]
-                for eid in ref["ids"]:
-                    mask = df_full["event_id_cnty"] == eid
-                    if not mask.any():
-                        eid_clean = eid.replace("-", "")
-                        mask = df_full["event_id_cnty"].str.replace("-", "", regex=False) == eid_clean
-                    if mask.any():
-                        record = df_full[mask].iloc[0]
-                        available = [c for c in display_cols if c in df_full.columns]
-                        st.dataframe(record[available].to_frame().T, use_container_width=True, hide_index=True)
-                        if "notes" in df_full.columns and pd.notna(record.get("notes", "")):
-                            st.markdown(f"**Notes:** {record['notes']}")
+            if selected_fn is not None:
+                ref = footnote_map[selected_fn]
+                st.markdown(f"**Footnote {selected_fn}:** {ref['raw']}")
+
+                if ref["type"] == "acled":
+                    display_cols = [
+                        "event_id_cnty", "event_date", "event_type", "sub_event_type",
+                        "actor1", "actor2", "admin1", "admin2", "location", "fatalities",
+                    ]
+                    for eid in ref["ids"]:
+                        mask = df_full["event_id_cnty"] == eid
+                        if not mask.any():
+                            mask = df_full["event_id_cnty"].str.replace("-", "", regex=False) == eid.replace("-", "")
+                        if mask.any():
+                            record = df_full[mask].iloc[0]
+                            available = [c for c in display_cols if c in df_full.columns]
+                            st.dataframe(record[available].to_frame().T, use_container_width=True, hide_index=True)
+                            if "notes" in df_full.columns and pd.notna(record.get("notes", "")):
+                                st.markdown(f"**Notes:** {record['notes']}")
+                        else:
+                            st.warning(f"Event ID `{eid}` not found in dataset.")
+
+                elif ref["type"] == "ipc":
+                    region = ref.get("region")
+                    if region and region in ipc_data:
+                        data = ipc_data[region]
+                        st.json({
+                            "region": region,
+                            "analysis_date": data.get("analysis_date"),
+                            "dominant_phase": data.get("dominant_phase"),
+                            "population_in_crisis_phase3+": data.get("population_in_crisis"),
+                            "population_in_emergency_phase4+": data.get("population_in_emergency"),
+                            "validity": f"{data.get('validity_from')} to {data.get('validity_to')}",
+                        })
                     else:
-                        st.warning(f"Event ID `{eid}` not found in dataset.")
+                        st.info("IPC reference — see the Food Security (IPC) section above.")
 
-            elif ref["type"] == "ipc":
-                region = ref.get("region")
-                if region and region in ipc_data:
-                    data = ipc_data[region]
-                    st.json({
-                        "region": region,
-                        "analysis_date": data.get("analysis_date"),
-                        "dominant_phase": data.get("dominant_phase"),
-                        "population_in_crisis_phase3+": data.get("population_in_crisis"),
-                        "population_in_emergency_phase4+": data.get("population_in_emergency"),
-                        "validity_from": data.get("validity_from"),
-                        "validity_to": data.get("validity_to"),
-                    })
+                elif ref["type"] == "chirps":
+                    region = ref.get("region")
+                    if region and region in rainfall_data:
+                        data = rainfall_data[region]
+                        st.json({
+                            "region": region,
+                            "date": data.get("date"),
+                            "r3q_pct_of_normal": data.get("r3q"),
+                            "status": data.get("status"),
+                            "version": data.get("version"),
+                        })
+                    else:
+                        st.info("CHIRPS reference — see the Rainfall Anomaly (CHIRPS) section above.")
+
+                elif ref["type"] == "displacement":
+                    region = ref.get("region")
+                    if region and region in displacement_data:
+                        data = displacement_data[region]
+                        st.json({
+                            "region": region,
+                            "idps": data.get("idps"),
+                            "reporting_date": data.get("reporting_date"),
+                            "source": data.get("source"),
+                        })
+                    else:
+                        st.info("Displacement reference — see the IDP Displacement section above.")
+
+                elif ref["type"] == "population":
+                    region = ref.get("region")
+                    if region and region in per_capita_data:
+                        data = per_capita_data[region]
+                        st.json({
+                            "region": region,
+                            "population": data.get("population"),
+                            "fatalities": data.get("fatalities"),
+                            "fatalities_per_100k": data.get("fatalities_per_100k"),
+                            "events": data.get("events"),
+                            "events_per_100k": data.get("events_per_100k"),
+                        })
+                    else:
+                        st.info("Population reference — see the Per-Capita Conflict Rate section above.")
+
                 else:
-                    st.info("IPC reference — check the IPC food security chart above for regional data.")
-
-            elif ref["type"] == "chirps":
-                region = ref.get("region")
-                if region and region in rainfall_data:
-                    data = rainfall_data[region]
-                    st.json({
-                        "region": region,
-                        "date": data.get("date"),
-                        "r3q_pct_of_normal": data.get("r3q"),
-                        "status": data.get("status"),
-                        "version": data.get("version"),
-                    })
-                else:
-                    st.info("CHIRPS reference — check the Rainfall Anomaly chart above for regional data.")
-
-            elif ref["type"] == "displacement":
-                region = ref.get("region")
-                if region and region in displacement_data:
-                    data = displacement_data[region]
-                    st.json({
-                        "region": region,
-                        "idps": data.get("idps"),
-                        "reporting_date": data.get("reporting_date"),
-                        "source": data.get("source"),
-                    })
-                else:
-                    st.info("Displacement reference — check the IDP Displacement chart above for regional data.")
-
-            elif ref["type"] == "population":
-                region = ref.get("region")
-                if region and region in per_capita_data:
-                    data = per_capita_data[region]
-                    st.json({
-                        "region": region,
-                        "population": data.get("population"),
-                        "events": data.get("events"),
-                        "events_per_100k": data.get("events_per_100k"),
-                        "fatalities_per_100k": data.get("fatalities_per_100k"),
-                    })
-                else:
-                    st.info("Population reference — check the Per-Capita Conflict Rate chart above.")
-
-            else:
-                st.info(f"Reference: {ref['raw']}")
+                    st.info(f"Reference: {ref['raw']}")
 
 # ============================================================
 # METHODOLOGY
