@@ -80,6 +80,7 @@ auth_response = requests.post(
     "https://acleddata.com/oauth/token",
     data={
         "username": email,
+        "email": email,
         "password": password,
         "grant_type": "password",
         "client_id": "acled"
