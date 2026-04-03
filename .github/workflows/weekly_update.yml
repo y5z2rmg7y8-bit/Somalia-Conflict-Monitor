@@ -1,0 +1,38 @@
+name: Weekly Somalia Conflict Monitor Update
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 6am UTC
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install requests pandas plotly streamlit anthropic python-dotenv openpyxl
+
+      - name: Run pipeline
+        env:
+          ACLED_EMAIL: ${{ secrets.ACLED_EMAIL }}
+          ACLED_PASSWORD: ${{ secrets.ACLED_PASSWORD }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DTM_API_KEY: ${{ secrets.DTM_API_KEY }}
+        run: python run_pipeline.py
+
+      - name: Commit and push updated data
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add acled_data.csv brief_raw.txt brief_metadata.json previous_predictions.txt
+          git diff --staged --quiet || git commit -m "Weekly update: $(date +%Y-%m-%d)"
+          git push

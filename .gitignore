@@ -27,7 +27,6 @@ analyst_knowledge.txt
 .claude/
 
 # Pipeline outputs (generated files, not source)
-previous_predictions.txt
 somalia_brief_*.docx
 somalia_brief_*.html
 streamlit.log
