@@ -313,6 +313,7 @@ fig_map.update_layout(
     )]
 )
 st.plotly_chart(fig_map, use_container_width=True)
+st.caption("*Strategic developments: non-violent events including troop movements, territorial transfers, ceasefires and peace agreements.")
 
 # ============================================================
 # ANALYTICAL BRIEF
