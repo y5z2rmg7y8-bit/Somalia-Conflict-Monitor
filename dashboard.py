@@ -293,7 +293,7 @@ fig_map.update_layout(
     legend=dict(
         orientation="h",
         yanchor="top",
-        y=-0.05,
+        y=-0.02,
         xanchor="center",
         x=0.5,
     ),
