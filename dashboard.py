@@ -189,6 +189,7 @@ def _pct_delta(current, previous):
 
 events_delta = _pct_delta(total_reporting_events, prev_events)
 fatalities_delta = _pct_delta(total_reporting_fatalities, prev_fatalities)
+regions_delta = _pct_delta(regions_affected, df_prev["admin1"].nunique())
 
 # National per-capita conflict rate
 national_percap = None
@@ -200,17 +201,21 @@ if per_capita_data:
 # IPC Phase 3+ total
 total_crisis = sum(v.get("population_in_crisis") or 0 for v in ipc_data.values()) if ipc_data else None
 
-def _stat_card(number, label, delta=None, delta_positive_is_bad=True, accent="#c0392b", fmt="{:,}"):
+def _stat_card(number, label, delta=None, delta_positive_is_bad=True, accent="#c0392b", fmt="{:,}", delta_color=None):
     number_str = fmt.format(number) if isinstance(number, (int, float)) else str(number)
-    delta_html = ""
     if delta:
-        # For conflict metrics, increases are bad (red), decreases are good (green)
-        is_increase = delta.startswith("+")
-        if delta_positive_is_bad:
-            color = "#c0392b" if is_increase else "#27ae60"
+        if delta_color == "off":
+            color = "#95a5a6"
+        elif delta_positive_is_bad:
+            color = "#c0392b" if delta.startswith("+") else "#27ae60"
         else:
-            color = "#27ae60" if is_increase else "#c0392b"
+            color = "#27ae60" if delta.startswith("+") else "#c0392b"
         delta_html = f'<div style="font-size:11px;color:{color};margin-top:2px;">{delta}</div>'
+    elif delta_color == "off":
+        # Invisible spacer so card height matches cards that have a delta
+        delta_html = '<div style="font-size:11px;margin-top:2px;">&nbsp;</div>'
+    else:
+        delta_html = ""
     return f"""
     <div style="background:#fff;border-radius:6px;padding:16px;text-align:center;
                 box-shadow:0 1px 4px rgba(0,0,0,0.08);border-top:3px solid {accent};">
@@ -224,8 +229,8 @@ def _stat_card(number, label, delta=None, delta_positive_is_bad=True, accent="#c
 col1, col2, col3, col4 = st.columns(4)
 col1.markdown(_stat_card(total_reporting_events, f"Conflict events ({reporting_period})", events_delta), unsafe_allow_html=True)
 col2.markdown(_stat_card(total_reporting_fatalities, f"Conflict fatalities ({reporting_period})", fatalities_delta), unsafe_allow_html=True)
-col3.markdown(_stat_card(regions_affected, f"Regions affected ({reporting_period})"), unsafe_allow_html=True)
-col4.markdown(_stat_card(total_dataset_events, "Total events (12 months)"), unsafe_allow_html=True)
+col3.markdown(_stat_card(regions_affected, f"Regions affected ({reporting_period})", regions_delta), unsafe_allow_html=True)
+col4.markdown(_stat_card(total_dataset_events, "Total events (12 months)", delta_color="off"), unsafe_allow_html=True)
 
 st.markdown("<div style='margin-top:12px'></div>", unsafe_allow_html=True)
 
