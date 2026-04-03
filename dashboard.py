@@ -114,7 +114,7 @@ st.markdown("<div style='margin-top:24px'></div>", unsafe_allow_html=True)
 # MAP — reporting month only
 # ============================================================
 
-st.markdown("### Conflict event map")
+st.markdown("### Conflict Event Map")
 st.caption("Note: 'Strategic developments' in ACLED captures non-violent events with political or military significance, including troop movements, territorial transfers, ceasefires and peace agreements.")
 
 df_map = df_reporting.copy()
@@ -163,12 +163,12 @@ st.caption("*Strategic developments: non-violent events including troop movement
 # CHARTS (2x2)
 # ============================================================
 
-st.markdown("### Data charts")
+st.markdown("### Data Charts")
 col_left, col_right = st.columns(2)
 
 # Chart 1: Events by type per month — all 12 months
 with col_left:
-    st.markdown("**Events by type — all 12 months**")
+    st.markdown("**Events By Type — All 12 Months**")
     month_starts_list = pd.date_range(start=date_start, end=df_full["event_date"].max(), freq="MS")
     type_rows = []
     for ms in month_starts_list:
@@ -190,7 +190,7 @@ with col_left:
 
 # Chart 2: Events by actor — reporting month, top 10
 with col_right:
-    st.markdown(f"**Events by actor — {reporting_period}**")
+    st.markdown(f"**Events By Actor — {reporting_period}**")
     actor_counts = df_reporting["actor1"].value_counts().head(10).reset_index()
     actor_counts.columns = ["Actor", "Count"]
     actor_counts["Actor"] = actor_counts["Actor"].str[:50]
@@ -203,7 +203,7 @@ col_left2, col_right2 = st.columns(2)
 
 # Chart 3: Event type by region heatmap — reporting month
 with col_left2:
-    st.markdown(f"**Event type by region — {reporting_period}**")
+    st.markdown(f"**Event Type By Region — {reporting_period}**")
     top_regions = df_reporting["admin1"].value_counts().head(10).index.tolist()
     etypes = list(colour_map.keys())
     etypes_labels = [chart_label(e) for e in etypes]
@@ -221,7 +221,7 @@ with col_left2:
 
 # Chart 4: Events by region — reporting month
 with col_right2:
-    st.markdown(f"**Events by region — {reporting_period}**")
+    st.markdown(f"**Events By Region — {reporting_period}**")
     region_counts = df_reporting["admin1"].value_counts().head(10).reset_index()
     region_counts.columns = ["Region", "Count"]
     fig4 = px.bar(region_counts, x="Count", y="Region", orientation="h", height=320,
@@ -234,7 +234,7 @@ with col_right2:
 # ============================================================
 
 if ipc_data:
-    st.markdown("### Food security (IPC)")
+    st.markdown("### Food Security (IPC)")
     sample = next(iter(ipc_data.values()))
     st.caption(
         f"IPC analysis date: {sample.get('analysis_date', 'unknown')} | "
@@ -276,7 +276,7 @@ if ipc_data:
     col_ipc_left, col_ipc_right = st.columns(2)
 
     with col_ipc_left:
-        st.markdown("**Population in IPC Phase 3+ (crisis or worse) by region**")
+        st.markdown("**Population In IPC Phase 3+ (Crisis Or Worse) By Region**")
         fig_ipc = go.Figure()
         fig_ipc.add_trace(go.Bar(
             x=df_ipc["Phase 3+ (crisis)"], y=df_ipc["Region"],
@@ -294,7 +294,7 @@ if ipc_data:
         st.plotly_chart(fig_ipc, use_container_width=True)
 
     with col_ipc_right:
-        st.markdown("**IPC phase by region (bubble size = Phase 3+ population)**")
+        st.markdown("**IPC Phase By Region (Bubble Size = Phase 3+ Population)**")
         PHASE_COLORS = {
             "1": "#2ecc71", "2": "#f1c40f", "3": "#e67e22",
             "3+": "#e67e22", "4": "#c0392b", "5": "#7b241c",
@@ -343,7 +343,7 @@ if ipc_data:
 # ============================================================
 
 if rainfall_data:
-    st.markdown("### Rainfall anomaly (CHIRPS)")
+    st.markdown("### Rainfall Anomaly (CHIRPS)")
     sample_r = next(iter(rainfall_data.values()))
     version_note = " — forecast, not yet finalised" if sample_r.get("version") == "forecast" else ""
     st.caption(
@@ -394,7 +394,7 @@ if rainfall_data:
 if per_capita_data:
     active_percap = {r: d for r, d in per_capita_data.items() if d.get("events", 0) > 0}
     if active_percap:
-        st.markdown(f"### Per-capita conflict rate — {reporting_period}")
+        st.markdown(f"### Per-Capita Conflict Rate — {reporting_period}")
         st.caption("Events per 100,000 population. Source: UNFPA 2021 population projections. Only regions with at least one event shown.")
 
         percap_rows = [
@@ -411,7 +411,7 @@ if per_capita_data:
 
         col_pc1, col_pc2 = st.columns(2)
         with col_pc1:
-            st.markdown("**Events per 100,000 population**")
+            st.markdown("**Events Per 100,000 Population**")
             fig_pc = px.bar(
                 df_percap, x="Events per 100k", y="Region", orientation="h", height=380,
                 color_discrete_sequence=["#1a2332"],
@@ -420,7 +420,7 @@ if per_capita_data:
             st.plotly_chart(fig_pc, use_container_width=True)
 
         with col_pc2:
-            st.markdown("**Raw events vs per-capita rate**")
+            st.markdown("**Raw Events Vs Per-Capita Rate**")
             fig_pc2 = px.scatter(
                 df_percap, x="Raw events", y="Events per 100k", text="Region",
                 height=380, color_discrete_sequence=["#c0392b"],
@@ -436,7 +436,7 @@ if per_capita_data:
 if displacement_data:
     active_disp = {r: d for r, d in displacement_data.items() if d.get("idps", 0) > 0}
     if active_disp:
-        st.markdown("### IDP displacement (IOM DTM)")
+        st.markdown("### IDP Displacement (IOM DTM)")
         sample_d = next(iter(displacement_data.values()))
         st.caption(
             f"Internally displaced persons (IDPs) by admin1 region. "
@@ -460,16 +460,16 @@ if displacement_data:
 # ANALYTICAL BRIEF
 # ============================================================
 
-st.markdown("### Analytical brief")
+st.markdown("### Analytical Brief")
 
 SECTION_MARKERS = [
     ("[OVERVIEW]", "Overview"),
-    ("[FORECAST REVIEW]", "Forecast review"),
-    ("[DATA COVERAGE]", "Data coverage"),
-    ("[THEMATIC ANALYSIS]", "Thematic analysis"),
-    ("[GEOGRAPHIC FOCUS]", "Geographic focus"),
-    ("[TRENDS AND OUTLOOK]", "Trends and outlook"),
-    ("[WHAT TO WATCH]", "What to watch"),
+    ("[FORECAST REVIEW]", "Forecast Review"),
+    ("[DATA COVERAGE]", "Data Coverage"),
+    ("[THEMATIC ANALYSIS]", "Thematic Analysis"),
+    ("[GEOGRAPHIC FOCUS]", "Geographic Focus"),
+    ("[TRENDS AND OUTLOOK]", "Trends And Outlook"),
+    ("[WHAT TO WATCH]", "What To Watch"),
     ("[REFERENCES]", "References"),
 ]
 
@@ -524,7 +524,7 @@ for marker, (title, content) in sections.items():
 # METHODOLOGY
 # ============================================================
 
-st.markdown("### Methodology and limitations")
+st.markdown("### Methodology And Limitations")
 with st.expander("Show methodology"):
     st.markdown("""
 **Conflict data.** Armed Conflict Location and Event Data (ACLED). Updated weekly, accessed via API. Provides event-level conflict data for the reporting month and aggregate statistics for baseline months.
