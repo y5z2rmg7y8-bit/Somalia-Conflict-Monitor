@@ -18,6 +18,9 @@ build/
 .AppleDouble
 .LSOverride
 
+# Analyst knowledge file — sensitive reference material, not for public repo
+analyst_knowledge.txt
+
 # Stray / temp files
 .e
 ~$*
