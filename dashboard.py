@@ -308,7 +308,7 @@ fig_map.update_layout(
         x=0.5, y=-0.14,
         xanchor="center", yanchor="top",
         showarrow=False,
-        font=dict(size=8, color="#7f8c8d"),
+        font=dict(size=10, color="#7f8c8d"),
         align="center",
     )]
 )
