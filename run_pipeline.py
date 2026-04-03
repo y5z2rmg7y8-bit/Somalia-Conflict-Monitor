@@ -55,6 +55,8 @@ CONTEXT NOTES (factual definitions and terminology):
 3. AUSSOM: The African Union Support and Stabilisation Mission in Somalia (AUSSOM) replaced ATMIS in early 2025. Use "AUSSOM" throughout.
 
 4. Key actor translations: "Military Forces of Somalia (2022-)" = Somali National Army (SNA) forces. "Al Shabaab" = al-Shabaab. "South West State Special Police Forces" = SWSPF. Spell out "Islamic State Somalia Province (ISSP)" on first use, then use "ISSP" thereafter.
+
+5. Baidoa geography: Baidoa is an inland city, not a port. Do not reference port facilities or maritime escape routes in connection with Baidoa or Bay region.
 """
 
 # ============================================================
@@ -334,6 +336,7 @@ STYLE:
 - Translate all other ACLED actor codes into natural analytical language.
 - CRITICAL FORMATTING RULE: Every paragraph in thematic analysis, geographic focus, trends and outlook, and forecast review sections must begin with a bold sub-heading followed by a full stop in regular weight, inline with the paragraph text. The sub-heading and paragraph text are part of the same paragraph, not separate elements. Format: **Sub-heading.** Paragraph text continues here. No exceptions.
 - When referring to forces or factions, always specify their alignment explicitly, e.g. "South-West State administration loyalists" or "Federal-aligned SWSPF units". Do not use "administration loyalists" or "opposition forces" without specifying which side they belong to.
+- Do not describe political competition between Federal and regional authorities as "territorial fragmentation". Political disputes over authority, alignment and governance are political dynamics, not territorial fragmentation. Reserve "territorial" language for physical control of land by armed groups.
 
 BANNED PHRASES AND SUPERLATIVE RULE:
 Banned words: "unprecedented", "historic", "never before", "the first time", "heaviest", "deadliest", "single largest", "single worst", "single biggest", "single most".
