@@ -293,7 +293,7 @@ fig_map.update_layout(
     legend=dict(
         orientation="h",
         yanchor="top",
-        y=-0.1,
+        y=-0.05,
         xanchor="center",
         x=0.5,
     ),
@@ -364,7 +364,7 @@ with col_left:
     fig1.update_layout(
         margin={"t": 10, "b": 60},
         xaxis={"tickangle": -45, "tickfont": {"size": 9}},
-        legend={"orientation": "h", "yanchor": "top", "y": -0.1, "xanchor": "center", "x": 0.5, "font": {"size": 10}},
+        legend={"orientation": "h", "yanchor": "top", "y": -0.25, "xanchor": "center", "x": 0.5, "font": {"size": 10}},
     )
     st.plotly_chart(fig1, use_container_width=True)
 
