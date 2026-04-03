@@ -653,15 +653,6 @@ if data_quality:
 
 st.markdown("### References")
 
-if "[REFERENCES]" in sections:
-    _, ref_content = sections["[REFERENCES]"]
-    for line in ref_content.split("\n"):
-        line = line.strip()
-        if line:
-            st.markdown(f"`{line}`")
-
-st.markdown("<div style='margin-top:8px'></div>", unsafe_allow_html=True)
-
 def _parse_ref(raw):
     raw = raw.strip()
     acled_ids = re.findall(r'SOM[\w-]+', raw)
@@ -681,7 +672,15 @@ def _parse_ref(raw):
         return {"type": "displacement", "region": _last_part(raw), "raw": raw}
     return {"type": "other", "raw": raw}
 
-with st.expander("Event Verification"):
+with st.expander("Show references and event verification"):
+    if "[REFERENCES]" in sections:
+        _, ref_content = sections["[REFERENCES]"]
+        for line in ref_content.split("\n"):
+            line = line.strip()
+            if line:
+                st.markdown(f"`{line}`")
+        st.markdown("---")
+
     st.caption("Spot-check claims in the analytical brief against raw ACLED event records.")
     ref_start = brief_text.find("[REFERENCES]")
     if ref_start == -1:
