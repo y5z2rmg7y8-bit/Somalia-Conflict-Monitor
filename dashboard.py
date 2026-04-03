@@ -4,8 +4,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import json
 import re
-import os
-
 st.set_page_config(
     page_title="Somalia Conflict Monitor",
     layout="wide",
@@ -120,7 +118,7 @@ def format_brief_html(text):
         return (
             '<div style="border-left:3px solid #b0bec5;padding:4px 12px;margin:8px 0 8px 0;'
             'color:#78909c;font-size:0.92em;font-style:italic;">'
-            f'Comment:{inner}</div>'
+            f'Comment: {inner}</div>'
         )
     text = re.sub(r'\[Comment:(.*?)\]', _comment_block, text, flags=re.DOTALL)
     # Assumption blocks → same style but slightly different shade
@@ -129,7 +127,7 @@ def format_brief_html(text):
         return (
             '<div style="border-left:3px solid #b0bec5;padding:4px 12px;margin:8px 0 8px 0;'
             'color:#78909c;font-size:0.92em;font-style:italic;">'
-            f'Assumption:{inner}</div>'
+            f'Assumption: {inner}</div>'
         )
     text = re.sub(r'\[Assumption:(.*?)\]', _assumption_block, text, flags=re.DOTALL)
     return text
@@ -312,16 +310,10 @@ st.plotly_chart(fig_map, use_container_width=True)
 st.markdown("### Analytical Brief")
 
 for marker, (title, content) in sections.items():
-    if marker == "[OVERVIEW]":
-        continue  # already shown as executive summary
+    if marker in ("[OVERVIEW]", "[REFERENCES]"):
+        continue  # overview shown as executive summary; references shown after charts
     st.markdown(f"#### {title}")
-    if marker == "[REFERENCES]":
-        with st.expander("Show references"):
-            for line in content.split("\n"):
-                line = line.strip()
-                if line:
-                    st.markdown(f"`{line}`")
-    elif marker == "[WHAT TO WATCH]":
+    if marker == "[WHAT TO WATCH]":
         for line in content.split("\n"):
             line = line.strip()
             if not line:
@@ -334,36 +326,6 @@ for marker, (title, content) in sections.items():
             if para:
                 st.markdown(format_brief_html(para.replace("\n", " ")), unsafe_allow_html=True)
     st.markdown("---")
-
-# ============================================================
-# DOWNLOAD BUTTONS
-# ============================================================
-
-st.markdown("#### Download Brief")
-dl_col1, dl_col2, _ = st.columns([1, 1, 4])
-
-docx_path = "somalia_brief_march_2026.docx"
-html_path = "somalia_brief_march_2026.html"
-
-if os.path.exists(docx_path):
-    with open(docx_path, "rb") as f:
-        dl_col1.download_button(
-            label="Download Word (.docx)",
-            data=f.read(),
-            file_name=docx_path,
-            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        )
-
-if os.path.exists(html_path):
-    with open(html_path, "rb") as f:
-        dl_col2.download_button(
-            label="Download HTML",
-            data=f.read(),
-            file_name=html_path,
-            mime="text/html",
-        )
-
-st.markdown("<div style='margin-top:24px'></div>", unsafe_allow_html=True)
 
 # ============================================================
 # CHARTS (2x2)
@@ -686,8 +648,19 @@ if data_quality:
     st.dataframe(df_dq, use_container_width=True, hide_index=True)
 
 # ============================================================
-# EVENT VERIFICATION
+# REFERENCES + EVENT VERIFICATION
 # ============================================================
+
+st.markdown("### References")
+
+if "[REFERENCES]" in sections:
+    _, ref_content = sections["[REFERENCES]"]
+    for line in ref_content.split("\n"):
+        line = line.strip()
+        if line:
+            st.markdown(f"`{line}`")
+
+st.markdown("<div style='margin-top:8px'></div>", unsafe_allow_html=True)
 
 def _parse_ref(raw):
     raw = raw.strip()
