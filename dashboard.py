@@ -162,7 +162,7 @@ fig_map.update_layout(
     annotations=[dict(
         text="*Strategic developments: non-violent<br>events including troop movements,<br>territorial transfers, ceasefires and<br>peace agreements.",
         xref="paper", yref="paper",
-        x=1.02, y=0.76,
+        x=1.02, y=0.72,
         xanchor="left", yanchor="top",
         showarrow=False,
         font=dict(size=8, color="#7f8c8d"),
