@@ -20,6 +20,8 @@ _PHRASE_REPLACEMENTS = [
     (r"\bthe primary theatre\b", "a major theatre"),
     (r"\bterritorial fragmentation\b", "political fragmentation"),
     (r"\bHarmacad\b", "Federal forces"),
+    (r"\bSouth[\-\s]West State Special Police Forces\b", "South-West State Forces"),
+    (r"\bSouthwest State Special Police Forces\b", "South-West State Forces"),
     (r"\bhighest monthly\b", "elevated monthly"),
 ]
 

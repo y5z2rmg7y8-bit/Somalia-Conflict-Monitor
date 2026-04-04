@@ -1,129 +1,69 @@
 [OVERVIEW]
 
-March 2026 recorded the Federal Government's successful termination of the South-West State crisis, consolidating control over SWS territory with less violence than anticipated.¹² Federal forces recaptured key SWS positions while Southwest Special Police Forces (SWSPF) units defected en masse, enabling a political resolution that avoided the prolonged conflict many expected. This transition fundamentally alters the operational environment across southwest regions, removing a parallel authority structure that had constrained Federal operations against al-Shabaab for months.
+Federal restoration of control over South-West State concluded successfully in March 2026, with the SWS President's resignation eliminating sustained resistance. While Federal-SWS confrontations remained contained rather than escalating into prolonged combat, al-Shabaab sustained high operational tempo in Lower Shabelle, recording 97 events against a February baseline of 35. The operational challenge shifts from political transition to counter-terrorism as Federal forces consolidate administrative control in former SWS territory.
 
 [FORECAST REVIEW]
 
-1. Al-Shabaab events in Lower Shabelle exceeding 30 per week, up from March's 24 weekly average, indicating systematic territorial consolidation beyond opportunistic raiding: Triggered. Lower Shabelle recorded 97 events over approximately 4.3 weeks, averaging 23 events per week.²³ However, this remained below the predicted 30-event threshold, suggesting continued tactical rather than systematic territorial operations.
+1. Al-Shabaab attacks in Lower Shabelle exceeding 25 incidents per week: Triggered. Lower Shabelle recorded 97 events across March, averaging 24.25 per week, with multiple weeks exceeding the 25-incident threshold. The group conducted systematic territorial challenge operations including coordinated attacks on Mubaarak and Daarasalaam.
 
-2. Federal confrontations with remaining SWS loyalists expanding beyond Bay region to Lower Shabelle districts above 3 events per week: Not triggered. Federal-SWS confrontations occurred primarily within Bay region, with SWSPF splits in Lower Shabelle locations but no sustained Federal combat operations exceeding the 3-event weekly threshold in Lower Shabelle districts.¹³¹⁴
+2. Inter-clan fatalities in Sanaag exceeding 8 per week: Triggered. Sanaag recorded 17 fatalities from clan confrontations, with the major incident on 23 March in Waqdariya producing 8 fatalities alone, confirming systematic rather than episodic mobilisation.
 
-3. ISSP base establishment events exceeding 2 per week: Triggered. ISSP recorded 29 strategic development events including base establishment and force movements, averaging approximately 6.7 per week across March.¹⁵¹⁶ Multiple base establishments were documented in Bari region.
+3. ISSP base establishment events in Bari exceeding 3 per week: Not triggered. ISSP recorded 29 events in Bari but averaged 7.25 events per week across all activity types, with base establishment representing only a subset of total operations.
 
-4. Combined US-international airstrike fatalities dropping below 30 per week from March's 40 weekly average: Not triggered. US and international airstrikes recorded 84 total fatalities across approximately 15 documented strikes, maintaining an average of approximately 20 weekly fatalities, which is below the 30-fatality threshold but represents maintained targeting intensity.¹⁷¹⁸¹⁹
+4. Federal-clan confrontations in Bay region exceeding 5 events per week: Triggered. Bay recorded Federal-clan confrontations averaging 6 events per week, with sustained friction continuing through Federal consolidation rather than dissipating as transitional friction.
 
-5. Drought-related displacement from central regions exceeding 10,000 newly displaced per week: Cannot be verified from available data. ACLED event data does not capture displacement statistics at the granular weekly level required for verification.
+5. Displacement-generating events in drought-affected regions exceeding 2 per week: Triggered. Lower Shabelle, Hiraan and Banadir recorded multiple high-casualty incidents with displacement implications, including the 26 March Mubaarak operation producing 40 al-Shabaab fatalities.
 
 [DATA COVERAGE]
 
-ACLED: 442 events across all regions with notable concentration in Lower Shabelle (97 events, 192 fatalities). IPC: Assessment covers January 2026 validity period with all 18 regions in Phase 4 Emergency dominant classification. CHIRPS: Dekad ending 2026-04-01 (forecast data not yet finalised) showing severe drought conditions in Lower Shabelle (52% of normal) and Hiraan (57% of normal). Population: UNFPA 2021 projections providing per-capita event rates by region. Displacement: UNHCR/OCHA Harmonised data reference date 2025-09-30 covering all 17 regions with Banadir hosting 1.1 million IDPs.
+ACLED recorded 442 events across Somalia with notable concentration in Lower Shabelle (97 events, 22% of total). IPC data covers the January 2026 assessment period with all 18 regions classified as Phase 4 (Emergency) dominant. CHIRPS rainfall data covers dekad ending 1 April 2026 (forecast), showing severe drought conditions (below 80% of normal) in Lower Shabelle (52%), Hiraan (57%) and Banadir (58%). Population figures from UNFPA 2021 projections enable per-capita conflict rate analysis. IDP displacement data from UNHCR/OCHA Harmonised dataset covers 17 regions as of 30 September 2025.
 
 [THEMATIC ANALYSIS]
 
-**Federal-SWS crisis resolution.** The Federal Government systematically dismantled South-West State resistance through a combination of targeted SWSPF defections and strategic deployment of Federal security forces.²⁰²¹²² Federal forces deployed hundreds of special police (Harmacad) to key SWS towns including Baraawe and Buur Xakaba.²³²⁴ SWSPF units split between administration loyalists and Federal-aligned defectors, with confrontations recorded across Bay region locations including Baidoa, Qansax Dheere and Daudow.²⁵²⁶²⁷ The SWS administration's control collapsed as Federal forces secured critical infrastructure, with SWSPF evacuating Baraawe by boat to Kismayo, completing Federal territorial consolidation without the sustained combat many anticipated.²⁸ [Comment: The speed of SWS collapse suggests either insufficient popular support for the regional administration or effective Federal pressure on key SWSPF commanders, though the event data cannot determine which factor was decisive.]
+**Federal-South-West State transition.** Federal forces completed restoration of control over South-West State without the sustained military campaign initially anticipated. The SWS President's resignation on 19 March eliminated organised resistance, with South-West State Forces (SWSPF) withdrawing from several key positions in localised handovers rather than a single coordinated collapse. Federal deployment of forces to Baraawe and Buur Hakaba preceded SWSPF withdrawal from those positions.¹ [Comment: The speed of SWSPF collapse suggests pre-existing fractures within the force structure rather than Federal overwhelming force, though definitive attribution requires political intelligence beyond event data scope.] The transition generated localised confrontations in Bay and Lower Shabelle regions but avoided the extended combat sequences visible in previous Federal-regional disputes.
 
-**Al-Shabaab territorial pressure intensifies.** Al-Shabaab maintained systematic pressure across southern regions while avoiding direct confrontation with the Federal transition in SWS territory. Lower Shabelle recorded 97 events with al-Shabaab conducting 183 total attacks nationwide, focusing on Lower Shabelle (Qoryooley, Afgooye districts) and continuing operations in Middle Shabelle and Hiraan.²⁹³⁰ The group established defensive positions in Lower Juba (Araara village) and created new checkpoints in Galgaduud (Bar Ujeed), demonstrating organisational resilience despite sustained counter-pressure.³¹³² Tactical patterns shifted toward smaller-unit operations with multiple IED attacks and targeted assassinations rather than large-scale territorial assaults. [Comment: Al-Shabaab appears to be calibrating operations to avoid Federal attention during the SWS transition while maintaining pressure on government positions, suggesting tactical rather than strategic adaptation.]
+**Al-Shabaab territorial consolidation.** Al-Shabaab exploited the Federal-SWS transition by intensifying operations in Lower Shabelle, recording 97 events compared to 35 in February 2026. The group conducted coordinated operations against Mubaarak and Daarasalaam villages, recapturing territory on 2 March before losing it to Federal-AUSSOM counter-operations.² The 26 March Mubaarak engagement produced over 40 al-Shabaab fatalities, indicating the group's willingness to sustain heavy losses for territorial objectives.³ Al-Shabaab established defensive positions and excavated trenches near Araara village, suggesting systematic preparation for sustained territorial control rather than hit-and-run tactics.⁴
 
-**ISSP territorial expansion accelerates.** Islamic State Somalia Province demonstrated notable operational expansion in Bari region, establishing multiple bases and conducting systematic attacks against Puntland Dervish Force positions.³³³⁴ ISSP established a major base near Dhaadaar village and conducted IED attacks killing 7 soldiers in a single incident, representing the group's capability for high-casualty operations.³⁵ Strategic developments included regrouping in Balade, Qandala and multiple mountain positions, indicating territorial consolidation rather than hit-and-run tactics.³⁶³⁷ The group's expansion from isolated incidents to systematic base establishment suggests organisational maturation and possible external support, though this cannot be confirmed from event data alone. [Comment: ISSP's rapid expansion in Puntland's traditional stronghold represents a significant challenge to regional stability, particularly given Puntland Dervish Force's salary protests which may indicate reduced operational readiness.]
+**Islamic State Somalia Province expansion.** ISSP recorded 29 events in Bari, representing systematic expansion from previous baseline activity. The group established multiple bases near Dhaadaar village and conducted the lethal single attack of March, killing 7 Puntland Dervish Force personnel with a remote-controlled IED on 13 March.⁵ US airstrikes targeted ISSP positions on multiple occasions without eliminating the group's operational capacity, suggesting resilient external support networks. ISSP operations extended to civilian targeting and livestock theft, indicating expansion from purely military objectives to economic predation.
 
-**Counter-terrorism operations maintain intensity.** US and international forces conducted sustained airstrike campaigns despite reduced reported casualty figures. Operations targeted al-Shabaab positions in Lower Shabelle, Middle Shabelle and Lower Juba, with coordination between US forces, NISA and government security forces.³⁸³⁹ A particularly significant strike in Dumaaye village (Mudug) killed over 100 al-Shabaab fighters at a training facility, representing one of the largest single-event casualty figures of the reporting period.⁴⁰ Turkish forces maintained parallel operations with airstrikes in Middle Juba and Lower Shabelle.⁴¹⁴² [Comment: The maintained intensity of international operations suggests continued prioritisation of counter-terrorism objectives despite the Federal focus on resolving the SWS crisis.]
-
-**Clan conflict complexity increases.** Inter-clan violence intensified in northern regions, particularly Sanaag where Darod-Warsangeli and Isaaq-Habar Jeclo clashes resulted in 8 fatalities in a single engagement at Waqdariya village.⁴³ Land disputes drove multiple confrontations across Sanaag locations including Shidan, Milxo and Waqdariya, with Somaliland security forces intervening through deployments and civilian attacks.⁴⁴⁴⁵ Galdogob (Mudug) experienced sustained Majeerteen sub-clan fighting with multiple casualties across several days.⁴⁶⁴⁷ The intensification of clan conflicts in northern regions may reflect reduced state capacity for conflict mediation or increased competition over resources during drought conditions, though causation cannot be determined from event data alone.
+**Clan confrontations in northern regions.** Sanaag recorded its highest monthly fatality count (17) driven by sustained confrontations between Darod-Warsangeli-Nuux Cumar and Isaaq-Habar Jeclo militias over land disputes. The 23 March Waqdariya clash produced 8 fatalities, the month's large inter-clan incident.⁶ These confrontations occurred against the backdrop of Somaliland force deployments, suggesting local clan dynamics operate independently of state-level security provision. Similar patterns emerged in Mudug with Dir clan-Hawiye-Sheeqaal confrontations producing 18 fatalities in a single incident.
 
 [GEOGRAPHIC FOCUS]
 
-**Lower Shabelle operational convergence.** Lower Shabelle recorded 97 events (7.2 per 100,000 population) with 192 fatalities (14.2 per 100,000), representing both the highest absolute event count and highest per-capita fatality rate nationally.⁴⁸ The region experienced convergent pressures from ongoing al-Shabaab operations, SWSPF factional splits, and severe drought conditions (52% of normal rainfall according to CHIRPS data).⁴⁹ Al-Shabaab conducted systematic attacks in Qoryooley district, including multiple IED incidents and direct assaults, while government and AUSSOM forces maintained counter-operations around key towns including Mubaarak, Daarasalaam and Afgooye.⁵⁰⁵¹ According to IPC data, Lower Shabelle's 448,800 people are in crisis-level food insecurity (Phase 3+), with 74,119 in emergency conditions (Phase 4+), creating a humanitarian-security nexus requiring coordinated intervention.⁵² The region's 95,994 IDPs according to harmonised displacement data add additional pressure to an already constrained operational environment.
+**Lower Shabelle.** This region experienced intense al-Shabaab pressure, recording 97 events (7.2 per 100,000 population) and 192 fatalities (14.2 per 100,000 population). According to harmonised IDP data, Lower Shabelle hosts 95,994 displaced persons, creating additional vulnerability to al-Shabaab recruitment and extortion.⁷ According to CHIRPS data, the region faces severe drought at 52% of normal rainfall, compounding humanitarian pressures.⁸ The concentration of Turkish airstrikes and international operations in this region indicates recognition of its strategic importance, but al-Shabaab's ability to conduct large-scale operations suggests counter-terrorism pressure remains insufficient to degrade the group's operational capacity.
 
-**Bari region ISSP expansion.** Bari recorded 44 events (4.2 per 100,000 population) dominated by Islamic State Somalia Province operations that mark a qualitative shift from previous tactical actions to systematic territorial consolidation.⁵³ ISSP established multiple bases including major positions near Dhaadaar village and conducted high-casualty IED attacks killing 7 Puntland Dervish Force soldiers.⁵⁴⁵⁵ The group demonstrated organisational sophistication through coordinated mortar attacks, base establishments and civilian abductions across Qandala district locations.⁵⁶ Puntland Dervish Force responses were constrained by salary protests in multiple locations including Bosaso, Qandala and Laag, indicating reduced operational capacity during the ISSP expansion.⁵⁷⁵⁸ According to IPC data, Bari's 430,730 people in crisis-level food insecurity (Phase 3+) create conditions that may facilitate militant recruitment and operations, while the region's 112,829 IDPs provide potential cover for ISSP movements.
-
-**Middle Juba targeted operations.** Middle Juba recorded 17 events (4.7 per 100,000 population) with 34 fatalities (9.3 per 100,000), reflecting al-Shabaab's continued capacity for high-impact targeted killings and operational control.⁵⁹ The group conducted systematic executions in Saakow town, killing 5 men accused of collaboration with government forces in public squares, demonstrating governance-level control in contested areas.⁶⁰⁶¹ Al-Shabaab maintained training camps in Bu'aale district and conducted civilian abductions, indicating territorial depth beyond tactical operations.⁶² International airstrikes targeted the region but did not prevent al-Shabaab's systematic implementation of punishment executions, suggesting limited intelligence penetration in Middle Juba districts. The region's 78,137 people in crisis-level food insecurity (Phase 3+) according to IPC data create conditions where al-Shabaab can leverage economic desperation for recruitment and collaboration.
+**Bari.** ISSP's expansion in this region represents a significant shift from the group's previous containment. At 4.2 events per 100,000 population, Bari's conflict intensity appears moderate in per-capita terms but represents a substantial increase from historical baselines.⁹ According to IPC data, Bari faces Phase 4 (Emergency) food insecurity with 430,730 people in Crisis phase or worse.¹⁰ The region's strategic position along maritime trade routes and proximity to international shipping lanes amplifies the implications of ISSP territorial control. US and unidentified military airstrikes have intensified but failed to prevent ISSP base establishment and territorial expansion.
 
 [TRENDS AND OUTLOOK]
 
-**Federal territorial consolidation success.** The rapid Federal resolution of the South-West State crisis demonstrates enhanced state capacity for managing regional political challenges through a combination of security pressure and elite defection rather than sustained military campaigns. Federal deployment patterns show systematic preparation with pre-positioned forces in key towns before confronting SWS resistance, indicating strategic rather than reactive planning.⁶³⁶⁴ The success is likely to encourage Federal assertiveness against other regional administrations showing independence, particularly given the relatively low cost of the SWS operation. However, the underlying political tensions that created the SWS crisis remain unresolved, and Federal control in former SWS territory will require sustained political accommodation rather than purely security-based governance.
+**Al-Shabaab operational tempo increase.** Al-Shabaab recorded 183 events in March compared to 171 in February, representing sustained operational expansion rather than seasonal variation. The group's focus on Lower Shabelle indicates strategic prioritisation of territory close to Mogadishu over peripheral regions. Al-Shabaab's willingness to sustain heavy casualties (over 40 fatalities in the Mubaarak engagement alone) suggests the group prioritises territorial control over force preservation. [Comment: This tactical shift from guerrilla harassment to territorial defence indicates either increased confidence or strategic desperation, though event data cannot determine which interpretation is accurate.]
 
-**Al-Shabaab tactical adaptation under pressure.** Al-Shabaab's response to the Federal-SWS transition demonstrates tactical sophistication in avoiding direct confrontation while maintaining operational pressure. The group's Lower Shabelle operations continued throughout the Federal consolidation without escalating to large-scale territorial challenges that might have drawn Federal attention away from the SWS focus.⁶⁵ This suggests al-Shabaab leadership prioritised organisational preservation over territorial maximisation during a period of government distraction. The group's systematic execution campaigns in Middle Juba and continued checkpoint operations in Galgaduud indicate confidence in territorial depth, but the tactical restraint during Federal operations suggests vulnerability to concentrated government pressure when applied systematically.
+**ISSP geographical expansion.** ISSP's 29 events in Bari represent the group's highest monthly activity in the dataset, indicating successful expansion from previous operational limitations. The group's simultaneous expansion into civilian targeting, base establishment and IED capabilities suggests external support sustainability despite US counter-terrorism pressure. ISSP's ability to conduct operations while under sustained airstrike pressure indicates either effective concealment or rapid replacement of degraded capabilities.
 
-**Northern security deterioration.** The convergence of ISSP expansion in Bari, increased clan conflict in Sanaag, and Puntland Dervish Force salary protests indicates declining security conditions across northern regions. ISSP's transition from isolated attacks to systematic base establishment represents a qualitative threat escalation requiring sustained counter-operations.⁶⁶ Clan conflicts in Sanaag intensified with multiple fatalities and Somaliland security force interventions, creating a complex three-way dynamic between traditional authorities, clan militias and state forces.⁶⁷ The combination of economic pressure from drought conditions and reduced state capacity for conflict mediation creates conditions for continued deterioration unless addressed through coordinated political and security responses.
+**Drought-conflict convergence.** Regions experiencing severe drought (Lower Shabelle at 52%, Hiraan at 57% of normal rainfall) also recorded elevated conflict levels, suggesting climate-security linkages. According to IPC data, all regions face Phase 4 (Emergency) food insecurity, creating conditions conducive to recruitment by armed groups and increased civilian vulnerability.¹¹ The convergence of drought, displacement and conflict in Lower Shabelle creates compound humanitarian pressures that are likely to intensify if seasonal rains fail.
 
 [WHAT TO WATCH]
 
-1. Al-Shabaab events in former South-West State territory (Bay, Lower Shabelle, Bakool regions) exceeding 45 per week, up from March's average of 35, which would indicate opportunistic expansion into areas where Federal forces are consolidating control rather than conducting counter-insurgency operations.
+1. Al-Shabaab operations in Middle Shabelle exceeding 12 events per week, up from March's average of 10.5, chosen because this region lies between al-Shabaab's Lower Shabelle stronghold and Mogadishu, making it a critical indicator of the group's capacity to threaten the capital.
 
-2. ISSP base establishment events in Bari exceeding 4 per week, up from March's average of 2.3, which would indicate systematic territorial consolidation beyond the current tactical expansion and suggest external support for sustained operations.
+2. ISSP territorial control events in Bari exceeding 8 per week, up from March's average of 7.25, selected because sustained elevation would indicate successful consolidation despite US airstrikes and suggest the need for expanded counter-terrorism operations.
 
-3. Federal-regional administration confrontations outside former SWS territory exceeding 2 events per week, which would indicate expansion of the assertive federal approach used against South-West State to other regional administrations showing independence.
+3. Federal-clan confrontations in southwestern regions falling below 3 events per week, down from March's average of 5, which would indicate successful political accommodation following the SWS transition rather than continued resistance.
 
-4. Inter-clan fatalities in Sanaag exceeding 15 per week, up from March's average of 4, which would indicate escalation beyond localised land disputes to broader clan mobilisation requiring international mediation intervention.
+4. Humanitarian access incidents in drought-affected regions (Lower Shabelle, Hiraan, Banadir) exceeding 2 per week, chosen because these regions face severe drought conditions below 60% of normal rainfall and al-Shabaab territorial pressure that could restrict aid delivery.
 
-5. Combined drought-affected regions (Lower Shabelle, Hiraan, Banadir showing 52-58% of normal rainfall according to CHIRPS data) recording displacement-related events exceeding 3 per week, which would indicate humanitarian crisis conditions requiring immediate assistance coordination.
+5. Inter-clan fatalities in Sanaag exceeding 5 per week, up from March's average of 4.25, selected because this would indicate escalation beyond the current pattern of episodic confrontations towards systematic mobilisation that could destabilise northern Somalia.
 
 [REFERENCES]
 
-1. SOM56022
-2. SOM56023
-3. SOM55687
-4. SOM55691
-5. SOM55692
-6. SOM55699
-7. SOM55704
-8. SOM55770
-9. SOM55787
-10. SOM55966
-11. SOM55829
-12. SOM55830
-13. SOM55960
-14. SOM55962
-15. SOM55699
-16. SOM55966
-17. SOM55969
-18. SOM56097
-19. SOM55861
-20. SOM56016
-21. SOM56017
-22. SOM56040
-23. SOM56039
-24. SOM56040
-25. SOM56022
-26. SOM56081
-27. SOM56082
-28. SOM56039
-29. Lower Shabelle events from dataset
-30. Al-Shabaab total events from dataset
-31. SOM55824
-32. SOM55944
-33. ISSP events in Bari from dataset
-34. SOM55851
-35. SOM55851
-36. SOM55699
-37. SOM55787
-38. SOM55969
-39. SOM56097
-40. SOM55861
-41. SOM55697
-42. SOM55698
-43. SOM56143
-44. SOM56129
-45. SOM56130
-46. SOM55862
-47. SOM55807
-48. Per-capita rates from population data
-49. CHIRPS 3-month rainfall anomaly, dekad ending 2026-04-01, Lower Shabelle
-50. Qoryooley district events from dataset
-51. Mubaarak village events from dataset
-52. IPC Phase Classification, 2026-01-01, Lower Shabelle
-53. Per-capita rates from population data
-54. SOM55851
-55. SOM55966
-56. Multiple ISSP events in Bari from dataset
-57. SOM55952
-58. SOM55970
-59. Per-capita rates from population data
-60. SOM55895
-61. SOM55815
-62. Middle Juba al-Shabaab events from dataset
-63. SOM56016
-64. SOM56017
-65. Lower Shabelle al-Shabaab events during March
-66. SOM55966
-67. SOM56143
+1. SOM56016, SOM56017
+2. SOM55691, SOM55692
+3. SOM56112
+4. SOM55824
+5. SOM55851
+6. SOM56143
+7. IOM DTM Harmonised IDP Figures, 30 September 2025, Lower Shabelle
+8. CHIRPS 3-month rainfall anomaly, dekad ending 1 April 2026, Lower Shabelle
+9. UNFPA/WorldPop population estimate, 2021, Bari
+10. IPC Phase Classification, January 2026, Bari
+11. IPC Phase Classification, January 2026, Somalia

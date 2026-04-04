@@ -53,6 +53,12 @@ CONTEXT NOTES (factual definitions and terminology):
 
 2. Federal forces: Federal forces deployed to South-West State. Do not refer to "Harmacad" forces by name. Use "Federal security forces" or "Federal forces" as the default term for all Federal deployments to South-West State. Do not attribute actions to a specific unit unless the data names it explicitly and unambiguously.
 
+5a. SWSPF naming: Refer to the South-West State Special Police Forces as "South-West State Forces (SWSPF)" on first use, then "SWSPF" thereafter. Do not use "South-West State Special Police Forces" or "Southwest State Special Police Forces".
+
+5b. SWSPF defections: SWSPF defections to Federal alignment were localised rather than en masse. Individual units defected in specific locations. Do not characterise this as a broad organisational collapse or suggest the SWSPF as a whole defected to Federal alignment.
+
+5c. Federal counter-terrorism and SWS: Do not assert that the Federal-SWS political crisis diverted or constrained Federal counter-terrorism operations against al-Shabaab. This is a political interpretation not directly supported by event data.
+
 3. AUSSOM: The African Union Support and Stabilisation Mission in Somalia (AUSSOM) replaced ATMIS in early 2025. Use "AUSSOM" throughout.
 
 4. Key actor translations: "Military Forces of Somalia (2022-)" = Somali National Army (SNA) forces. "Al Shabaab" = al-Shabaab. "South West State Special Police Forces" = SWSPF. Spell out "Islamic State Somalia Province (ISSP)" on first use, then use "ISSP" thereafter.
@@ -346,7 +352,7 @@ STYLE:
 - 600-800 words total. Every sentence must earn its place.
 - Capitalise "Federal" when referring to the Federal Government of Somalia or Federal forces.
 - Use "South-West State" (hyphenated), not "Southwest" or "Southwest State".
-- SWSPF refers to South-West State Special Police Forces, not Southwest Special Police Forces.
+- SWSPF refers to South-West State Forces. Spell out as "South-West State Forces (SWSPF)" on first use. Do not use "South-West State Special Police Forces" or "Southwest State Special Police Forces".
 - Spell out all acronyms and abbreviations on first use, followed by the abbreviation in brackets. Use the abbreviation thereafter.
 - Where the specific Federal unit is not clearly identified in the ACLED data, use "Federal forces" as the default term.
 - Translate all other ACLED actor codes into natural analytical language.
