@@ -9,6 +9,7 @@ from data_rainfall import get_rainfall_summary, format_rainfall_for_prompt
 from data_population import get_population_summary, compute_per_capita, format_population_for_prompt
 from data_displacement import get_displacement_summary, format_displacement_for_prompt
 from post_processing import filter_superlatives
+from seasonal_analysis import retrospective_anomaly_analysis, detect_current_anomalies, format_seasonal_for_prompt
 import os
 import json
 from datetime import datetime
@@ -193,6 +194,18 @@ except Exception as e:
     displacement_data = {}
     displacement_text = ""
 
+print("\n[Seasonal] Running retrospective anomaly analysis...")
+try:
+    anomaly_eval = retrospective_anomaly_analysis(df, output_file="anomaly_evaluation.txt")
+    current_anomalies = detect_current_anomalies(df, CURRENT_MONTH_START)
+    seasonal_text = format_seasonal_for_prompt(current_anomalies, CURRENT_MONTH_START, anomaly_eval=anomaly_eval)
+    print(f"[Seasonal] {len(current_anomalies)} anomalous regions detected for {CURRENT_MONTH_START}.")
+except Exception as e:
+    print(f"Warning: Seasonal analysis unavailable: {e}")
+    anomaly_eval = {}
+    current_anomalies = []
+    seasonal_text = ""
+
 # ============================================================
 # STEP 3: PREPARE DATA FOR CLAUDE
 # ============================================================
@@ -292,6 +305,9 @@ You will receive UNFPA 2021 population projections and per-capita conflict event
 IDP DISPLACEMENT DATA:
 You will receive harmonised IDP (internally displaced person) figures by admin1 region. The primary source is the UNHCR/OCHA Harmonised IDP dataset (cross-agency, district-aggregated). Regions absent from that source are supplemented with IOM DTM API data. Where displacement figures are available, include them alongside conflict statistics in the geographic focus section where directly relevant. High displacement figures in a region experiencing active conflict may indicate population flight or prior displacement accumulation. Attribute figures clearly: "According to harmonised IDP data..." or "According to IOM DTM data..." as labelled, and add a footnote using the IOM DTM reference format above.
 
+RETROSPECTIVE ANOMALY EVALUATION:
+You will receive retrospective anomaly evaluation data showing the historical reliability of seasonal anomaly flags by region. When citing an anomaly flag in the brief, note its historical reliability if available. For example: 'Lower Shabelle is currently 15% above its seasonal norm. Historically, above-norm flags in this region have been followed by sustained elevation in 4 of 5 cases.'
+
 CROSS-DATASET ANALYSIS:
 Where multiple datasets are available for a region, integrate them into a single analytical picture rather than listing each separately. Connect conflict intensity (ACLED), food security (IPC), rainfall (CHIRPS), displacement (IOM DTM) and population vulnerability into coherent assessments of humanitarian impact. A region experiencing escalating conflict, drought, high food insecurity and significant displacement simultaneously faces compounding pressures. Flag these convergences explicitly. Use per-capita rates to identify regions where raw event counts understate severity. Do not write a standalone cross-dataset section. Integrate multi-dataset analysis within the thematic analysis and geographic focus sections where supported by the data.
 
@@ -379,6 +395,8 @@ FORMAT:
 
 Omit [FORECAST REVIEW] if no previous predictions are available."""
 
+seasonal_block = f"\n\n{seasonal_text}" if seasonal_text else ""
+
 user_message = f"""Produce the monthly intelligence brief for Somalia. The REPORTING PERIOD is {REPORTING_PERIOD}.
 
 CONTEXT NOTES:
@@ -399,7 +417,7 @@ BASELINE STATISTICAL SUMMARIES (for trend comparison only):
 
 {population_text}
 
-{displacement_text}"""
+{displacement_text}{seasonal_block}"""
 
 client = Anthropic(api_key=anthropic_key)
 response = client.messages.create(
@@ -469,9 +487,14 @@ data_quality = {
     },
 }
 
+# Build lean anomaly_eval for metadata (include records for timeline chart)
+_anomaly_records = anomaly_eval.pop("anomaly_records", []) if anomaly_eval else []
+_anomaly_eval_meta = dict(anomaly_eval) if anomaly_eval else {}
+_anomaly_eval_meta["anomaly_records"] = _anomaly_records
+
 print("\n[5/6] Creating HTML brief...")
 html_filename = f"somalia_brief_{REPORTING_PERIOD.lower().replace(' ', '_')}.html"
-create_brief_html(brief_text, df, REPORTING_PERIOD, html_filename, monthly_baselines=monthly_baselines, current_month_start=CURRENT_MONTH_START, ipc_data=ipc_data, rainfall_data=rainfall_data, per_capita_data=per_capita_data, displacement_data=displacement_data, data_quality=data_quality)
+create_brief_html(brief_text, df, REPORTING_PERIOD, html_filename, monthly_baselines=monthly_baselines, current_month_start=CURRENT_MONTH_START, ipc_data=ipc_data, rainfall_data=rainfall_data, per_capita_data=per_capita_data, displacement_data=displacement_data, data_quality=data_quality, anomaly_eval=_anomaly_eval_meta)
 
 print("\n[6/6] Saving data...")
 df.to_csv("acled_data.csv", index=False)
@@ -486,6 +509,7 @@ metadata = {
     "reporting_month_events": len(df_march),
     "total_fatalities_reporting_month": int(df_march["fatalities"].sum()),
     "baseline_months": [{"label": m["label"], "events": len(m["df"])} for m in monthly_baselines],
+    "anomaly_eval": _anomaly_eval_meta,
     "ipc_data": {
         region: {
             "ipc_region": data["ipc_region"],

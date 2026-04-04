@@ -41,6 +41,7 @@ rainfall_data = metadata.get("rainfall_data", {})
 per_capita_data = metadata.get("per_capita_data", {})
 displacement_data = metadata.get("displacement_data", {})
 data_quality = metadata.get("data_quality", {})
+anomaly_eval = metadata.get("anomaly_eval", {})
 
 df_reporting = df_full[df_full["event_date"] >= current_month_start].copy()
 
@@ -664,6 +665,105 @@ if data_quality:
         })
     df_dq = pd.DataFrame(dq_rows)
     st.dataframe(df_dq, use_container_width=True, hide_index=True)
+
+# ============================================================
+# FORECAST EVALUATION
+# ============================================================
+
+if anomaly_eval:
+    above_sustained_pct = anomaly_eval.get("above_sustained_pct", 0.0)
+    below_sustained_pct = anomaly_eval.get("below_sustained_pct", 0.0)
+    above_reverted_pct = anomaly_eval.get("above_reverted_pct", 0.0)
+    below_reverted_pct = anomaly_eval.get("below_reverted_pct", 0.0)
+    total_above = anomaly_eval.get("total_above", 0)
+    total_below = anomaly_eval.get("total_below", 0)
+    methodology_note = (
+        f"Retrospective analysis of 36 months of data shows that {above_sustained_pct:.0f}% of "
+        f"above-norm anomaly flags were followed by sustained elevated activity in the subsequent month."
+    )
+    st.markdown("### Forecast Evaluation")
+    st.caption(methodology_note)
+    with st.expander("Show forecast evaluation"):
+        st.caption(methodology_note)
+
+        # Two-column summary table
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Above-norm flags**")
+            st.dataframe(pd.DataFrame([
+                {"Metric": "Total above-norm flags", "Value": total_above},
+                {"Metric": "% sustained", "Value": f"{above_sustained_pct:.1f}%"},
+                {"Metric": "% reverted", "Value": f"{above_reverted_pct:.1f}%"},
+            ]), hide_index=True, use_container_width=True)
+        with col2:
+            st.markdown("**Below-norm flags**")
+            st.dataframe(pd.DataFrame([
+                {"Metric": "Total below-norm flags", "Value": total_below},
+                {"Metric": "% sustained", "Value": f"{below_sustained_pct:.1f}%"},
+                {"Metric": "% reverted", "Value": f"{below_reverted_pct:.1f}%"},
+            ]), hide_index=True, use_container_width=True)
+
+        # Per-region bar chart: above-norm hit rate
+        by_region = anomaly_eval.get("by_region", {})
+        bar_rows = [
+            {"Region": region, "Hit Rate %": v["above_hit_rate"], "Above Flags": v["above"]}
+            for region, v in by_region.items()
+            if v["above"] >= 1
+        ]
+        if bar_rows:
+            df_bar = pd.DataFrame(bar_rows).sort_values("Hit Rate %", ascending=True)
+            colors = []
+            for hr in df_bar["Hit Rate %"]:
+                if hr >= 70:
+                    colors.append("#27ae60")
+                elif hr >= 50:
+                    colors.append("#e67e22")
+                else:
+                    colors.append("#c0392b")
+            fig_bar = go.Figure(go.Bar(
+                x=df_bar["Hit Rate %"],
+                y=df_bar["Region"],
+                orientation="h",
+                marker_color=colors,
+                text=[f"{v:.0f}%" for v in df_bar["Hit Rate %"]],
+                textposition="outside",
+            ))
+            fig_bar.update_layout(
+                title="Above-norm anomaly hit rate by region",
+                xaxis_title="Hit rate (%)",
+                yaxis_title="",
+                height=max(300, len(df_bar) * 25 + 80),
+                margin={"t": 40, "b": 40, "l": 10, "r": 60},
+            )
+            st.plotly_chart(fig_bar, use_container_width=True)
+
+        # Timeline scatter: above-norm records
+        anomaly_records = anomaly_eval.get("anomaly_records", [])
+        above_records = [r for r in anomaly_records if r.get("flag") == "above"]
+        if above_records:
+            df_scatter = pd.DataFrame(above_records)
+            df_scatter["sustained_label"] = df_scatter["sustained"].map(
+                {True: "Sustained", False: "Reverted", None: "No followup"}
+            ).fillna("No followup")
+            color_map_scatter = {
+                "Sustained": "#27ae60",
+                "Reverted": "#c0392b",
+                "No followup": "#95a5a6",
+            }
+            fig_scatter = px.scatter(
+                df_scatter,
+                x="year_month",
+                y="region",
+                color="sustained_label",
+                color_discrete_map=color_map_scatter,
+                title="Above-norm flags over time (green=sustained, red=reverted, grey=no followup)",
+                height=500,
+            )
+            fig_scatter.update_layout(
+                margin={"t": 40, "b": 40, "l": 10},
+                legend_title="Outcome",
+            )
+            st.plotly_chart(fig_scatter, use_container_width=True)
 
 # ============================================================
 # REFERENCES + EVENT VERIFICATION
