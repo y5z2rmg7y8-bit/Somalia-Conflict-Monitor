@@ -20,6 +20,7 @@ _PHRASE_REPLACEMENTS = [
     (r"\bthe primary theatre\b", "a major theatre"),
     (r"\bterritorial fragmentation\b", "political fragmentation"),
     (r"\bHarmacad\b", "Federal forces"),
+    (r"\bhighest monthly\b", "elevated monthly"),
 ]
 
 _MONTH_MAP = {
