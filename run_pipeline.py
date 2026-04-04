@@ -49,19 +49,19 @@ CURRENT_MONTH_START = "2026-03-01"
 POLITICAL_CONTEXT = """
 CONTEXT NOTES (factual definitions and terminology):
 
-1. South-West State terminology: In the current South-West State (SWS) crisis, "opposition" refers to Federal-backed forces opposing the SWS administration, NOT opposition to the Federal Government. The SWS Special Police Forces (SWSPF) are split between units loyal to the SWS administration and units that defected to Federal alignment. Use precise language to distinguish these factions. By the end of March 2026, the SWS administration had capitulated and the SWS President had resigned. Federal control was restored. Federal re-establishment of control was less violent than expected but not peaceful. Do not characterise it as either a bloodless takeover or a major military operation without evidence from the data. Federal-SWS combat was isolated rather than sustained. The collapse of SWS resistance did not generate prolonged fighting. Do not characterise Federal operations against SWS as "sustained combat operations" or "sustained military campaign".
+1. South-West State terminology: In the current South-West State (SWS) crisis, "opposition" refers to Federal-backed forces opposing the SWS administration, NOT opposition to the Federal Government. SWS Forces are split between units loyal to the SWS administration and units that defected to Federal alignment. Use precise language to distinguish these factions. By the end of March 2026, the SWS administration had capitulated and the SWS President had resigned. Federal control was restored. Federal re-establishment of control was less violent than expected but not peaceful. Do not characterise it as either a bloodless takeover or a major military operation without evidence from the data. Federal-SWS combat was isolated rather than sustained. The collapse of SWS resistance did not generate prolonged fighting. Do not characterise Federal operations against SWS as "sustained combat operations" or "sustained military campaign".
 
 2. Federal forces: Federal forces deployed to South-West State. Do not refer to "Harmacad" forces by name. Use "Federal security forces" or "Federal forces" as the default term for all Federal deployments to South-West State. Do not attribute actions to a specific unit unless the data names it explicitly and unambiguously.
 
-5a. SWSPF naming: Refer to the South-West State Special Police Forces as "South-West State Forces (SWSPF)" on first use, then "SWSPF" thereafter. Do not use "South-West State Special Police Forces" or "Southwest State Special Police Forces".
+5a. SWS Forces naming: Refer to the South-West State Special Police Forces as "South-West State Forces (SWS Forces)" on first use, then "SWS Forces" thereafter. Do not use "SWSPF", "South-West State Special Police Forces" or "Southwest State Special Police Forces".
 
-5b. SWSPF defections: SWSPF defections to Federal alignment were localised rather than en masse. Individual units defected in specific locations. Do not characterise this as a broad organisational collapse or suggest the SWSPF as a whole defected to Federal alignment.
+5b. SWS Forces defections: SWS Forces defections to Federal alignment were localised rather than en masse. Individual units defected in specific locations. Do not characterise this as a broad organisational collapse or suggest SWS Forces as a whole defected to Federal alignment.
 
 5c. Federal counter-terrorism and SWS: Do not assert that the Federal-SWS political crisis diverted or constrained Federal counter-terrorism operations against al-Shabaab. This is a political interpretation not directly supported by event data.
 
 3. AUSSOM: The African Union Support and Stabilisation Mission in Somalia (AUSSOM) replaced ATMIS in early 2025. Use "AUSSOM" throughout.
 
-4. Key actor translations: "Military Forces of Somalia (2022-)" = Somali National Army (SNA) forces. "Al Shabaab" = al-Shabaab. "South West State Special Police Forces" = SWSPF. Spell out "Islamic State Somalia Province (ISSP)" on first use, then use "ISSP" thereafter.
+4. Key actor translations: "Military Forces of Somalia (2022-)" = Somali National Army (SNA) forces. "Al Shabaab" = al-Shabaab. "South West State Special Police Forces" = SWS Forces. Spell out as "South-West State Forces (SWS Forces)" on first use. Spell out "Islamic State Somalia Province (ISSP)" on first use, then use "ISSP" thereafter.
 
 5. Baidoa geography: Baidoa is an inland city, not a port. Do not reference port facilities or maritime escape routes in connection with Baidoa or Bay region.
 """
@@ -323,7 +323,7 @@ Present factual statements from the data, then add analytical commentary in squa
 Apply this format to every significant analytical inference. The consumer should be able to distinguish data-derived facts from analyst interpretation at a glance.
 
 When stating assumptions, use: [Assumption: ...]. When a significant development could plausibly be explained by more than one cause, present competing assumptions with a primary and at least one alternative. For example:
-"[Assumption: Federal forces are deliberately undermining South-West State authority through targeted recruitment of SWSPF defectors. Alternative: Individual SWSPF units are defecting opportunistically in response to unpaid salaries rather than under Federal direction.]"
+"[Assumption: Federal forces are deliberately undermining South-West State authority through targeted recruitment of SWS Forces defectors. Alternative: Individual SWS Forces units are defecting opportunistically in response to unpaid salaries rather than under Federal direction.]"
 
 PROBABILITY LANGUAGE:
 When making predictive judgments about tactical or operational patterns in the coming period, use these terms WITHOUT percentage ranges in the text:
@@ -352,12 +352,12 @@ STYLE:
 - 600-800 words total. Every sentence must earn its place.
 - Capitalise "Federal" when referring to the Federal Government of Somalia or Federal forces.
 - Use "South-West State" (hyphenated), not "Southwest" or "Southwest State".
-- SWSPF refers to South-West State Forces. Spell out as "South-West State Forces (SWSPF)" on first use. Do not use "South-West State Special Police Forces" or "Southwest State Special Police Forces".
+- SWS Forces refers to South-West State Forces. Spell out as "South-West State Forces (SWS Forces)" on first use, then use "SWS Forces" thereafter. Do not use the abbreviation "SWSPF".
 - Spell out all acronyms and abbreviations on first use, followed by the abbreviation in brackets. Use the abbreviation thereafter.
 - Where the specific Federal unit is not clearly identified in the ACLED data, use "Federal forces" as the default term.
 - Translate all other ACLED actor codes into natural analytical language.
 - CRITICAL FORMATTING RULE: Every paragraph in thematic analysis, geographic focus, trends and outlook, and forecast review sections must begin with a bold sub-heading followed by a full stop in regular weight, inline with the paragraph text. The sub-heading and paragraph text are part of the same paragraph, not separate elements. Format: **Sub-heading.** Paragraph text continues here. No exceptions.
-- When referring to forces or factions, always specify their alignment explicitly, e.g. "South-West State administration loyalists" or "Federal-aligned SWSPF units". Do not use "administration loyalists" or "opposition forces" without specifying which side they belong to.
+- When referring to forces or factions, always specify their alignment explicitly, e.g. "South-West State administration loyalists" or "Federal-aligned SWS Forces units". Do not use "administration loyalists" or "opposition forces" without specifying which side they belong to.
 - Do not describe political competition between Federal and regional authorities as "territorial fragmentation". Political disputes over authority, alignment and governance are political dynamics, not territorial fragmentation. Reserve "territorial" language for physical control of land by armed groups.
 
 BANNED PHRASES AND SUPERLATIVE RULE:

@@ -22,6 +22,7 @@ _PHRASE_REPLACEMENTS = [
     (r"\bHarmacad\b", "Federal forces"),
     (r"\bSouth[\-\s]West State Special Police Forces\b", "South-West State Forces"),
     (r"\bSouthwest State Special Police Forces\b", "South-West State Forces"),
+    (r"\bSWS\s?PF\b", "SWS Forces"),
     (r"\bhighest monthly\b", "elevated monthly"),
 ]
 
